@@ -6,7 +6,7 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["**", "!!**/dist", "!!**/.astro", "!!**/node_modules"]
+		"includes": ["**", "!!**/dist", "!!**/.astro", "!!**/node_modules", "!!src/index.css"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -15,7 +15,10 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"complexity": {
+				"noImportantStyles": "off"
+			}
 		}
 	},
 	"javascript": {
@@ -30,5 +33,23 @@
 				"organizeImports": "on"
 			}
 		}
-	}
+	},
+	"overrides": [
+		{
+			"includes": ["src/index.css"],
+			"formatter": { "enabled": false },
+			"linter": { "enabled": false }
+		},
+		{
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
+					}
+				}
+			}
+		}
+	]
 }
