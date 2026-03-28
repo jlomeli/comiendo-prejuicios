@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Header } from "@/components/header";
+import {
+	Hero,
+	Problem,
+	Solution,
+	HowItWorks,
+	Testimonials,
+	About,
+	FinalCta,
+	Footer,
+} from "@/components/sections";
+---
+
+<Layout>
+	<Header client:load />
+	<main>
+		<Hero client:load />
+		<Problem client:visible />
+		<Solution client:visible />
+		<HowItWorks client:visible />
+		<Testimonials client:visible />
+		<About client:visible />
+		<FinalCta client:visible />
+	</main>
+	<Footer client:visible />
+</Layout>
