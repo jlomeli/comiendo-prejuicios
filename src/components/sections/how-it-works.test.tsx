@@ -6,7 +6,7 @@ describe("HowItWorks", () => {
 	it("renders the section heading", () => {
 		render(<HowItWorks />);
 		expect(
-			screen.getByRole("heading", { name: "Cómo trabajamos juntas" }),
+			screen.getByRole("heading", { name: "Qué esperar" }),
 		).toBeInTheDocument();
 	});
 
@@ -20,10 +20,10 @@ describe("HowItWorks", () => {
 
 	it("renders all 4 step titles", () => {
 		render(<HowItWorks />);
+		expect(screen.getByText("Primer contacto")).toBeInTheDocument();
 		expect(screen.getByText("Consulta gratuita")).toBeInTheDocument();
-		expect(screen.getByText("Evaluación y plan")).toBeInTheDocument();
-		expect(screen.getByText("Sesiones de terapia")).toBeInTheDocument();
-		expect(screen.getByText("Seguimiento y ajustes")).toBeInTheDocument();
+		expect(screen.getByText("Comenzamos")).toBeInTheDocument();
+		expect(screen.getByText("Seguimiento")).toBeInTheDocument();
 	});
 
 	it("renders exactly 4 steps", () => {

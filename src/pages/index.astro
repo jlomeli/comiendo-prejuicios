@@ -2,12 +2,14 @@
 import { Header } from "@/components/header";
 import {
 	About,
-	FinalCta,
+	ActApproach,
+	Contact,
+	Faq,
+	Fees,
 	Footer,
 	Hero,
 	HowItWorks,
 	Problem,
-	Solution,
 	Testimonials,
 } from "@/components/sections";
 import Layout from "../layouts/Layout.astro";
@@ -18,11 +20,13 @@ import Layout from "../layouts/Layout.astro";
 	<main>
 		<Hero client:load />
 		<Problem client:visible />
-		<Solution client:visible />
-		<HowItWorks client:visible />
-		<Testimonials client:visible />
 		<About client:visible />
-		<FinalCta client:visible />
+		<ActApproach client:visible />
+		<HowItWorks client:visible />
+		<Fees client:visible />
+		<Testimonials client:visible />
+		<Faq client:visible />
+		<Contact client:visible />
 	</main>
 	<Footer client:visible />
 </Layout>

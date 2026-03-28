@@ -18,7 +18,7 @@ describe("Testimonials", () => {
 		expect(blockquotes).toHaveLength(3);
 	});
 
-	it("renders all 3 author names", () => {
+	it("renders all 3 author names with — Cliente attribution", () => {
 		render(<Testimonials />);
 		expect(screen.getByText("M.")).toBeInTheDocument();
 		expect(screen.getByText("L.")).toBeInTheDocument();
@@ -34,5 +34,11 @@ describe("Testimonials", () => {
 			screen.getByText("Neurodivergencia y relación con la comida"),
 		).toBeInTheDocument();
 		expect(screen.getByText("Trauma y autoestima")).toBeInTheDocument();
+	});
+
+	it("does not render avatar images", () => {
+		render(<Testimonials />);
+		const images = document.querySelectorAll("blockquote img");
+		expect(images).toHaveLength(0);
 	});
 });

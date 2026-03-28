@@ -13,20 +13,23 @@ describe("Footer", () => {
 
 	it("renders footer navigation links", () => {
 		render(<Footer />);
-		// Scope to the footer nav to avoid collision with photo credit links sharing the same label
 		const nav = screen.getByRole("navigation", {
 			name: "Enlaces del pie de página",
 		});
-		expect(
-			within(nav).getByRole("link", { name: "Consulta gratuita" }),
-		).toHaveAttribute("href", "#consultation");
-		expect(within(nav).getByRole("link", { name: "Proceso" })).toHaveAttribute(
-			"href",
-			"#como-funciona",
-		);
 		expect(within(nav).getByRole("link", { name: "Sobre mí" })).toHaveAttribute(
 			"href",
 			"#sobre-mi",
+		);
+		expect(within(nav).getByRole("link", { name: "Enfoque" })).toHaveAttribute(
+			"href",
+			"#enfoque",
+		);
+		expect(
+			within(nav).getByRole("link", { name: "Honorarios" }),
+		).toHaveAttribute("href", "#honorarios");
+		expect(within(nav).getByRole("link", { name: "Contacto" })).toHaveAttribute(
+			"href",
+			"#contacto",
 		);
 	});
 
@@ -49,5 +52,11 @@ describe("Footer", () => {
 	it("renders the brand name", () => {
 		render(<Footer />);
 		expect(screen.getByText("Comiendo Prejuicios")).toBeInTheDocument();
+	});
+
+	it("renders therapist credentials", () => {
+		render(<Footer />);
+		expect(screen.getByText("Dra. Claudia Gomez")).toBeInTheDocument();
+		expect(screen.getByText(/Psicóloga · Terapeuta ACT/)).toBeInTheDocument();
 	});
 });
