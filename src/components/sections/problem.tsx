@@ -1,76 +1,162 @@
 import { ScrollReveal } from "@/components/scroll-reveal";
-import { images } from "@/lib/images";
 
-const PAIN_POINTS = [
+const CARDS = [
 	{
-		title: "La comida controla tu día",
+		id: "alimentacion",
+		title: "Alimentación & Cuerpo",
 		description:
-			"Pensamientos constantes sobre qué comer, cuánto o cuándo. La culpa después de comer te acompaña y afecta tu bienestar.",
+			"La comida ocupa demasiado espacio mental. La culpa después de comer, el miedo a ciertos alimentos, la relación con tu cuerpo que siente como batalla constante.",
+		icon: (
+			<svg
+				viewBox="0 0 40 40"
+				fill="none"
+				role="presentation"
+				aria-hidden
+				className="w-8 h-8"
+			>
+				<path
+					d="M20 8c-2 0-4 1.5-4 4s2 4 4 4 4-1.5 4-4-2-4-4-4z"
+					stroke="currentColor"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+				<path
+					d="M12 28c0-4.4 3.6-8 8-8s8 3.6 8 8"
+					stroke="currentColor"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+				<path
+					d="M8 20c2-2 4-2 5 0M27 20c1-2 3-2 5 0"
+					stroke="currentColor"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+			</svg>
+		),
 	},
 	{
-		title: "El trauma que no se va",
+		id: "trauma",
+		title: "Trauma & Pasado",
 		description:
-			"Experiencias pasadas siguen impactando cómo te sientes con tu cuerpo y con la comida. Quieres soltar el peso sin saber por dónde empezar.",
+			"Experiencias que no eligiste siguen moldeando tu presente. Reacciones que no entiendes, relaciones que duelen, un cuerpo que recuerda lo que la mente quiere olvidar.",
+		icon: (
+			<svg
+				viewBox="0 0 40 40"
+				fill="none"
+				role="presentation"
+				aria-hidden
+				className="w-8 h-8"
+			>
+				<circle
+					cx="20"
+					cy="20"
+					r="10"
+					stroke="currentColor"
+					strokeWidth="1.5"
+				/>
+				<path
+					d="M20 14v6l4 3"
+					stroke="currentColor"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<path
+					d="M13 10l-2-2M27 10l2-2M13 30l-2 2M27 30l2 2"
+					stroke="currentColor"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+			</svg>
+		),
 	},
 	{
-		title: "Un mundo que no está hecho para ti",
+		id: "neurodivergencia",
+		title: "Neurodivergencia & Vida Diaria",
 		description:
-			"Si eres neurodivergente, las expectativas sociales y las rutinas rígidas pueden hacer que la alimentación y el autocuidado sean aún más difíciles.",
+			"Un mundo diseñado para mentes neurotípicas puede agotarte. Las rutinas, las texturas, la sobrecarga sensorial y la autoexigencia hacen que el día a día se sienta cuesta arriba.",
+		icon: (
+			<svg
+				viewBox="0 0 40 40"
+				fill="none"
+				role="presentation"
+				aria-hidden
+				className="w-8 h-8"
+			>
+				<path
+					d="M20 8c6.6 0 12 5.4 12 12S26.6 32 20 32 8 26.6 8 20 13.4 8 20 8z"
+					stroke="currentColor"
+					strokeWidth="1.5"
+				/>
+				<path
+					d="M14 20c0-3.3 2.7-6 6-6M20 26c-3.3 0-6-2.7-6-6"
+					stroke="currentColor"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+				<circle cx="26" cy="17" r="1.5" fill="currentColor" />
+			</svg>
+		),
 	},
-];
+] as const;
 
 export function Problem() {
 	return (
 		<section
-			id="problema"
-			className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-muted/40"
+			id="para-quien"
+			className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8"
+			style={{ background: "var(--brand-linen)" }}
 			aria-labelledby="problem-heading"
 		>
 			<div className="max-w-5xl mx-auto">
 				<ScrollReveal className="text-center mb-16">
-					<p className="text-primary font-medium text-sm uppercase tracking-widest mb-3">
-						Si te identificas
+					<p
+						className="text-sm uppercase tracking-[0.2em] mb-4"
+						style={{ color: "var(--brand-sage)" }}
+					>
+						Para quién es este espacio
 					</p>
 					<h2
 						id="problem-heading"
-						className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground"
+						className="font-serif text-4xl sm:text-5xl font-light text-foreground mb-4"
 					>
-						No estás sola en esto
+						Quizás estás aquí si...
 					</h2>
-					<p className="text-muted-foreground text-lg mt-4 max-w-2xl mx-auto">
-						Muchas mujeres adultas viven con estas experiencias. Reconocerlas es
-						el primer paso.
+					<p className="text-muted-foreground text-lg max-w-xl mx-auto font-light leading-relaxed">
+						Reconocerse en estas palabras no es debilidad. Es el primer paso
+						para dejar de pelear sola.
 					</p>
 				</ScrollReveal>
 
-				<ScrollReveal delay={0.05} className="mb-12">
-					<div className="relative w-full max-w-2xl mx-auto aspect-[16/10] rounded-[1.5rem] overflow-hidden shadow-md border border-border/60">
-						<img
-							src={images.problem}
-							alt=""
-							className="w-full h-full object-cover"
-							width={800}
-							height={500}
-							loading="lazy"
-						/>
-					</div>
-				</ScrollReveal>
-
 				<div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
-					{PAIN_POINTS.map((item, i) => (
-						<ScrollReveal key={item.title} delay={i * 0.1} className="group">
-							<div className="h-full p-6 sm:p-8 rounded-[1.5rem] bg-card border border-border/60 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:border-primary/20">
+					{CARDS.map((card, i) => (
+						<ScrollReveal key={card.id} delay={i * 0.12}>
+							<div
+								className="h-full p-8 rounded-3xl border transition-all duration-500 hover:shadow-lg"
+								style={{
+									background: "var(--brand-cream)",
+									borderColor: "var(--brand-mist)",
+									color: "var(--brand-stone)",
+								}}
+							>
 								<div
-									className="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center text-primary bg-primary/10"
-									aria-hidden
+									className="w-12 h-12 rounded-2xl mb-6 flex items-center justify-center"
+									style={{
+										background: "var(--brand-linen)",
+										color: "var(--brand-sage)",
+									}}
 								>
-									<span className="text-lg font-semibold">{i + 1}</span>
+									{card.icon}
 								</div>
-								<h3 className="text-xl font-semibold text-foreground mb-3">
-									{item.title}
+								<h3 className="font-serif text-xl font-normal text-foreground mb-3">
+									{card.title}
 								</h3>
-								<p className="text-muted-foreground leading-relaxed">
-									{item.description}
+								<p
+									className="text-sm leading-relaxed font-light"
+									style={{ color: "var(--brand-stone-light)" }}
+								>
+									{card.description}
 								</p>
 							</div>
 						</ScrollReveal>

@@ -1,11 +1,18 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* ============================================================
+   Brand: "Luz de tarde" — Afternoon Light
+   Warm amber filtering through soft linen. Earthy, still, held.
+   Target: Adult women 25-50 navigating eating disorders, trauma,
+   neurodivergence. Safe first. Competent second.
+   ============================================================ */
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -44,78 +51,94 @@
 }
 
 :root {
-  /* Organic wellness theme: soft, warm, calm */
+  /* ── Brand palette ──────────────────────────────────────── */
+  --brand-cream:       #F7F3EE;   /* page background */
+  --brand-linen:       #EDE8E0;   /* cards, secondary bg */
+  --brand-stone:       #4A4540;   /* body text, foreground */
+  --brand-stone-light: #8C8480;   /* muted text, placeholders */
+  --brand-sage:        #7B9E87;   /* primary, links, focus */
+  --brand-dusty-rose:  #C9A09A;   /* warm hover states */
+  --brand-terracotta:  #B85C45;   /* CTA buttons only */
+  --brand-mist:        #D4CFC8;   /* borders, dividers */
+
+  /* ── Tailwind semantic tokens ───────────────────────────── */
   --radius: 1.5rem;
   --radius-lg: 2rem;
   --radius-xl: 2.5rem;
   --radius-full: 9999px;
-  --background: oklch(0.985 0.01 85);
-  --foreground: oklch(0.28 0.02 60);
-  --card: oklch(1 0.008 90);
-  --card-foreground: oklch(0.28 0.02 60);
-  --popover: oklch(1 0.008 90);
-  --popover-foreground: oklch(0.28 0.02 60);
-  --primary: oklch(0.45 0.08 145);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.94 0.03 85);
-  --secondary-foreground: oklch(0.32 0.02 60);
-  --muted: oklch(0.96 0.015 85);
-  --muted-foreground: oklch(0.5 0.02 60);
-  --accent: oklch(0.92 0.04 75);
-  --accent-foreground: oklch(0.32 0.04 55);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.91 0.02 85);
-  --input: oklch(0.93 0.02 85);
-  --ring: oklch(0.45 0.08 145);
-  --chart-1: oklch(0.45 0.08 145);
-  --chart-2: oklch(0.65 0.1 55);
-  --chart-3: oklch(0.55 0.06 200);
-  --chart-4: oklch(0.7 0.12 85);
-  --chart-5: oklch(0.6 0.08 280);
-  --sidebar: oklch(0.98 0.01 85);
-  --sidebar-foreground: oklch(0.28 0.02 60);
-  --sidebar-primary: oklch(0.45 0.08 145);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.94 0.03 85);
-  --sidebar-accent-foreground: oklch(0.32 0.02 60);
-  --sidebar-border: oklch(0.91 0.02 85);
-  --sidebar-ring: oklch(0.45 0.08 145);
-  --organic-blob: oklch(0.96 0.04 145);
-  --organic-blob-2: oklch(0.94 0.06 75);
+
+  --background:          #F7F3EE;
+  --foreground:          #4A4540;
+  --card:                #EDE8E0;
+  --card-foreground:     #4A4540;
+  --popover:             #EDE8E0;
+  --popover-foreground:  #4A4540;
+  --primary:             #7B9E87;
+  --primary-foreground:  #F7F3EE;
+  --secondary:           #EDE8E0;
+  --secondary-foreground:#4A4540;
+  --muted:               #F2EDE8;
+  --muted-foreground:    #8C8480;
+  --accent:              #C9A09A;
+  --accent-foreground:   #4A4540;
+  --destructive:         #C0492C;
+  --border:              #D4CFC8;
+  --input:               #D4CFC8;
+  --ring:                #7B9E87;
+
+  --chart-1: #7B9E87;
+  --chart-2: #C9A09A;
+  --chart-3: #B85C45;
+  --chart-4: #EDE8E0;
+  --chart-5: #4A4540;
+
+  --sidebar:                  #F7F3EE;
+  --sidebar-foreground:       #4A4540;
+  --sidebar-primary:          #7B9E87;
+  --sidebar-primary-foreground:#F7F3EE;
+  --sidebar-accent:           #EDE8E0;
+  --sidebar-accent-foreground:#4A4540;
+  --sidebar-border:           #D4CFC8;
+  --sidebar-ring:             #7B9E87;
+
+  /* ── Hero organic shapes ────────────────────────────────── */
+  --organic-blob:   #E8EFE8;   /* soft sage tint */
+  --organic-blob-2: #F5EBE0;   /* warm amber tint */
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Warm dark: deep espresso + soft candlelight */
+  --background:          #2A2420;
+  --foreground:          #F0EBE3;
+  --card:                #362F2B;
+  --card-foreground:     #F0EBE3;
+  --popover:             #362F2B;
+  --popover-foreground:  #F0EBE3;
+  --primary:             #9AB8A6;
+  --primary-foreground:  #2A2420;
+  --secondary:           #403830;
+  --secondary-foreground:#F0EBE3;
+  --muted:               #3A322E;
+  --muted-foreground:    #B0A8A0;
+  --accent:              #D4ABA5;
+  --accent-foreground:   #2A2420;
+  --destructive:         #D9614A;
+  --border:              #50443E;
+  --input:               #50443E;
+  --ring:                #9AB8A6;
+  --chart-1: #9AB8A6;
+  --chart-2: #D4ABA5;
+  --chart-3: #D9614A;
+  --chart-4: #403830;
+  --chart-5: #F0EBE3;
+  --sidebar:                  #2A2420;
+  --sidebar-foreground:       #F0EBE3;
+  --sidebar-primary:          #9AB8A6;
+  --sidebar-primary-foreground:#2A2420;
+  --sidebar-accent:           #403830;
+  --sidebar-accent-foreground:#F0EBE3;
+  --sidebar-border:           #50443E;
+  --sidebar-ring:             #9AB8A6;
 }
 
 @layer base {
@@ -128,5 +151,16 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Breathing motion — ease-in-out, 400-700ms, never abrupt */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }

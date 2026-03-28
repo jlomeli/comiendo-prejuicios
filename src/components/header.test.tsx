@@ -12,11 +12,11 @@ describe("Header", () => {
 	it("renders all navigation links", () => {
 		render(<Header />);
 		for (const label of [
-			"Problema",
-			"Solución",
-			"Proceso",
-			"Testimonios",
 			"Sobre mí",
+			"Enfoque",
+			"Para quién",
+			"Honorarios",
+			"Contacto",
 		]) {
 			expect(
 				screen.getAllByRole("link", { name: label }).length,
@@ -50,7 +50,7 @@ describe("Header", () => {
 
 		const mobileMenu = document.getElementById("mobile-menu") as HTMLElement;
 		const mobileLink = mobileMenu.querySelector(
-			"a[href='#como-funciona']",
+			"a[href='#enfoque']",
 		) as Element;
 		expect(mobileLink).not.toBeNull();
 		await userEvent.click(mobileLink);
@@ -58,11 +58,11 @@ describe("Header", () => {
 		expect(document.getElementById("mobile-menu")).toBeNull();
 	});
 
-	it("CTA links point to #consultation", () => {
+	it("CTA links point to #contacto", () => {
 		render(<Header />);
-		const ctaLinks = screen.getAllByRole("link", { name: "Consulta gratuita" });
+		const ctaLinks = screen.getAllByRole("link", { name: "Hablemos" });
 		for (const link of ctaLinks) {
-			expect(link).toHaveAttribute("href", "#consultation");
+			expect(link).toHaveAttribute("href", "#contacto");
 		}
 	});
 });

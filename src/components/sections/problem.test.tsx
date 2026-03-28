@@ -6,34 +6,30 @@ describe("Problem", () => {
 	it("renders the section heading", () => {
 		render(<Problem />);
 		expect(
-			screen.getByRole("heading", { name: "No estás sola en esto" }),
+			screen.getByRole("heading", { name: "Quizás estás aquí si..." }),
 		).toBeInTheDocument();
 	});
 
-	it("renders numbered badges 1, 2, and 3", () => {
+	it("renders all 3 card titles", () => {
 		render(<Problem />);
-		expect(screen.getByText("1")).toBeInTheDocument();
-		expect(screen.getByText("2")).toBeInTheDocument();
-		expect(screen.getByText("3")).toBeInTheDocument();
-	});
-
-	it("renders all 3 pain point titles", () => {
-		render(<Problem />);
-		expect(screen.getByText("La comida controla tu día")).toBeInTheDocument();
-		expect(screen.getByText("El trauma que no se va")).toBeInTheDocument();
+		expect(screen.getByText("Alimentación & Cuerpo")).toBeInTheDocument();
+		expect(screen.getByText("Trauma & Pasado")).toBeInTheDocument();
 		expect(
-			screen.getByText("Un mundo que no está hecho para ti"),
+			screen.getByText("Neurodivergencia & Vida Diaria"),
 		).toBeInTheDocument();
 	});
 
-	it("renders exactly 3 pain point cards", () => {
+	it("renders exactly 3 cards", () => {
 		render(<Problem />);
-		// Each card contains a numbered badge; count the badge elements
-		const badges = [
-			screen.getByText("1"),
-			screen.getByText("2"),
-			screen.getByText("3"),
-		];
-		expect(badges).toHaveLength(3);
+		expect(screen.getByText("Alimentación & Cuerpo")).toBeInTheDocument();
+		expect(screen.getByText("Trauma & Pasado")).toBeInTheDocument();
+		expect(
+			screen.getByText("Neurodivergencia & Vida Diaria"),
+		).toBeInTheDocument();
+	});
+
+	it("renders the section label", () => {
+		render(<Problem />);
+		expect(screen.getByText("Para quién es este espacio")).toBeInTheDocument();
 	});
 });

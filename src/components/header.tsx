@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-	{ href: "#problema", label: "Problema" },
-	{ href: "#solucion", label: "Solución" },
-	{ href: "#como-funciona", label: "Proceso" },
-	{ href: "#testimonios", label: "Testimonios" },
 	{ href: "#sobre-mi", label: "Sobre mí" },
+	{ href: "#enfoque", label: "Enfoque" },
+	{ href: "#para-quien", label: "Para quién" },
+	{ href: "#honorarios", label: "Honorarios" },
+	{ href: "#contacto", label: "Contacto" },
 ];
 
 export function Header() {
@@ -24,9 +24,9 @@ export function Header() {
 				>
 					<a
 						href="#hero"
-						className="font-semibold text-foreground text-lg hover:text-primary transition-colors"
+						className="font-semibold text-foreground text-lg hover:text-primary transition-colors duration-500"
 					>
-						<span className="font-serif">Comiendo Prejuicios</span>
+						<span className="font-serif italic">Comiendo Prejuicios</span>
 					</a>
 
 					{/* Desktop nav */}
@@ -35,7 +35,7 @@ export function Header() {
 							<li key={link.href}>
 								<a
 									href={link.href}
-									className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+									className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-500"
 									onClick={() => setMenuOpen(false)}
 								>
 									{link.label}
@@ -43,8 +43,12 @@ export function Header() {
 							</li>
 						))}
 						<li>
-							<Button asChild size="sm" className="rounded-xl">
-								<a href="#consultation">Consulta gratuita</a>
+							<Button
+								asChild
+								size="sm"
+								className="rounded-xl bg-[var(--brand-terracotta)] hover:bg-[var(--brand-dusty-rose)] text-white border-0 transition-colors duration-500"
+							>
+								<a href="#contacto">Hablemos</a>
 							</Button>
 						</li>
 					</ul>
@@ -75,7 +79,7 @@ export function Header() {
 						initial={{ height: 0, opacity: 0 }}
 						animate={{ height: "auto", opacity: 1 }}
 						exit={{ height: 0, opacity: 0 }}
-						transition={{ duration: 0.25 }}
+						transition={{ duration: 0.4, ease: "easeInOut" }}
 					>
 						<ul className="px-4 py-4 space-y-1">
 							{NAV_LINKS.map((link) => (
@@ -83,7 +87,7 @@ export function Header() {
 									<a
 										href={link.href}
 										className={cn(
-											"block py-3 px-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors",
+											"block py-3 px-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-500",
 										)}
 										onClick={() => setMenuOpen(false)}
 									>
@@ -92,10 +96,14 @@ export function Header() {
 								</li>
 							))}
 							<li className="pt-2">
-								<Button asChild className="w-full rounded-xl" size="lg">
+								<Button
+									asChild
+									className="w-full rounded-xl bg-[var(--brand-terracotta)] hover:bg-[var(--brand-dusty-rose)] text-white border-0 transition-colors duration-500"
+									size="lg"
+								>
 									{/* biome-ignore lint/a11y/useValidAnchor: valid page-section navigation */}
-									<a href="#consultation" onClick={() => setMenuOpen(false)}>
-										Consulta gratuita
+									<a href="#contacto" onClick={() => setMenuOpen(false)}>
+										Hablemos
 									</a>
 								</Button>
 							</li>

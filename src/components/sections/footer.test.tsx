@@ -13,41 +13,39 @@ describe("Footer", () => {
 
 	it("renders footer navigation links", () => {
 		render(<Footer />);
-		// Scope to the footer nav to avoid collision with photo credit links sharing the same label
 		const nav = screen.getByRole("navigation", {
 			name: "Enlaces del pie de página",
 		});
-		expect(
-			within(nav).getByRole("link", { name: "Consulta gratuita" }),
-		).toHaveAttribute("href", "#consultation");
-		expect(within(nav).getByRole("link", { name: "Proceso" })).toHaveAttribute(
-			"href",
-			"#como-funciona",
-		);
 		expect(within(nav).getByRole("link", { name: "Sobre mí" })).toHaveAttribute(
 			"href",
 			"#sobre-mi",
 		);
-	});
-
-	it("renders the photo credits heading", () => {
-		render(<Footer />);
-		expect(screen.getByText("Créditos fotográficos")).toBeInTheDocument();
-	});
-
-	it("renders photo credit links with no duplicate URLs", () => {
-		render(<Footer />);
-		const creditLinks = Array.from(
-			document.querySelectorAll("a[target='_blank']"),
-		).filter((el) => el.getAttribute("href")?.includes("/photos/"));
-		const hrefs = creditLinks.map((el) => el.getAttribute("href"));
-		const unique = new Set(hrefs);
-		expect(hrefs.length).toBeGreaterThan(0);
-		expect(hrefs.length).toBe(unique.size);
+		expect(within(nav).getByRole("link", { name: "Enfoque" })).toHaveAttribute(
+			"href",
+			"#enfoque",
+		);
+		expect(
+			within(nav).getByRole("link", { name: "Honorarios" }),
+		).toHaveAttribute("href", "#honorarios");
+		expect(within(nav).getByRole("link", { name: "Contacto" })).toHaveAttribute(
+			"href",
+			"#contacto",
+		);
 	});
 
 	it("renders the brand name", () => {
 		render(<Footer />);
 		expect(screen.getByText("Comiendo Prejuicios")).toBeInTheDocument();
+	});
+
+	it("renders therapist credentials", () => {
+		render(<Footer />);
+		expect(screen.getByText("Dra. Claudia Gomez")).toBeInTheDocument();
+		expect(screen.getByText(/Psicóloga · Terapeuta ACT/)).toBeInTheDocument();
+	});
+
+	it("does not render a photo credits section", () => {
+		render(<Footer />);
+		expect(screen.queryByText("Créditos fotográficos")).not.toBeInTheDocument();
 	});
 });
