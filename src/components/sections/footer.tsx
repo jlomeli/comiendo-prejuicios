@@ -1,16 +1,9 @@
 import { ScrollReveal } from "@/components/scroll-reveal";
-import { photoCredits } from "@/lib/images";
-
-const UNSPLASH_URL = "https://unsplash.com";
 
 const DIVIDER_COLOR = "rgba(212,207,200,0.15)";
 
 export function Footer() {
 	const currentYear = new Date().getFullYear();
-
-	const uniqueCredits = Array.from(
-		new Map(photoCredits.map((c) => [c.url, c])).values(),
-	);
 
 	return (
 		<footer
@@ -65,49 +58,6 @@ export function Footer() {
 							))}
 						</ul>
 					</nav>
-				</ScrollReveal>
-
-				<ScrollReveal className="mt-10">
-					<div className="pt-8 border-t" style={{ borderColor: DIVIDER_COLOR }}>
-						<p
-							className="text-xs font-medium mb-2"
-							style={{ color: "var(--brand-mist)" }}
-						>
-							Créditos fotográficos
-						</p>
-						<p
-							className="text-xs font-light mb-3"
-							style={{ color: "var(--brand-stone-light)" }}
-						>
-							Las imágenes de esta web son de{" "}
-							<a
-								href={UNSPLASH_URL}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="underline underline-offset-2 hover:opacity-70 transition-opacity"
-								style={{ color: "var(--brand-mist)" }}
-							>
-								Unsplash
-							</a>
-							. Cada enlace lleva a la foto en Unsplash, donde se muestra el
-							autor.
-						</p>
-						<ul className="flex flex-wrap gap-x-4 gap-y-1">
-							{uniqueCredits.map((credit) => (
-								<li key={credit.url}>
-									<a
-										href={credit.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="text-xs font-light underline underline-offset-2 hover:opacity-70 transition-opacity"
-										style={{ color: "var(--brand-stone-light)" }}
-									>
-										{credit.label}
-									</a>
-								</li>
-							))}
-						</ul>
-					</div>
 				</ScrollReveal>
 
 				<ScrollReveal className="mt-8">

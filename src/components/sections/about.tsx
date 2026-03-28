@@ -1,5 +1,174 @@
 import { ScrollReveal } from "@/components/scroll-reveal";
-import { images } from "@/lib/images";
+
+/* Illustrated botanical portrait — warm, artful, not a placeholder */
+function BotanicalPortrait() {
+	return (
+		<div
+			className="relative w-full aspect-square rounded-[2rem] overflow-hidden flex items-center justify-center border-2"
+			style={{
+				background: `
+					radial-gradient(ellipse 70% 80% at 40% 60%, #C9A09A22 0%, transparent 60%),
+					radial-gradient(ellipse 60% 50% at 70% 20%, #7B9E8718 0%, transparent 55%),
+					var(--brand-linen)
+				`,
+				borderColor: "var(--brand-mist)",
+			}}
+		>
+			{/* Botanical frame — decorative SVG illustration */}
+			<svg
+				viewBox="0 0 300 300"
+				fill="none"
+				role="presentation"
+				aria-hidden
+				className="absolute inset-0 w-full h-full"
+			>
+				{/* Bottom-left botanical spray */}
+				<path
+					d="M10 290 C20 260 15 240 30 215 C40 195 25 175 42 155"
+					stroke="var(--brand-sage)"
+					strokeWidth="1.2"
+					strokeLinecap="round"
+				/>
+				<ellipse
+					cx="50"
+					cy="148"
+					rx="14"
+					ry="26"
+					transform="rotate(-20 50 148)"
+					fill="var(--brand-sage)"
+					fillOpacity="0.12"
+					stroke="var(--brand-sage)"
+					strokeWidth="0.8"
+				/>
+				<path
+					d="M30 225 C12 215 4 200 2 185"
+					stroke="var(--brand-sage)"
+					strokeWidth="1"
+					strokeLinecap="round"
+				/>
+				<ellipse
+					cx="0"
+					cy="178"
+					rx="10"
+					ry="18"
+					transform="rotate(10 0 178)"
+					fill="var(--brand-sage)"
+					fillOpacity="0.09"
+					stroke="var(--brand-sage)"
+					strokeWidth="0.7"
+				/>
+				<path
+					d="M34 200 C50 188 60 172 65 155"
+					stroke="var(--brand-sage)"
+					strokeWidth="0.9"
+					strokeLinecap="round"
+				/>
+
+				{/* Top-right botanical spray */}
+				<path
+					d="M290 10 C278 40 283 60 268 85 C258 105 272 125 256 145"
+					stroke="var(--brand-dusty-rose)"
+					strokeWidth="1.2"
+					strokeLinecap="round"
+				/>
+				<ellipse
+					cx="248"
+					cy="152"
+					rx="14"
+					ry="26"
+					transform="rotate(20 248 152)"
+					fill="var(--brand-dusty-rose)"
+					fillOpacity="0.10"
+					stroke="var(--brand-dusty-rose)"
+					strokeWidth="0.8"
+				/>
+				<path
+					d="M266 92 C283 82 294 68 298 52"
+					stroke="var(--brand-dusty-rose)"
+					strokeWidth="1"
+					strokeLinecap="round"
+				/>
+				<ellipse
+					cx="300"
+					cy="44"
+					rx="10"
+					ry="18"
+					transform="rotate(-12 300 44)"
+					fill="var(--brand-dusty-rose)"
+					fillOpacity="0.09"
+					stroke="var(--brand-dusty-rose)"
+					strokeWidth="0.7"
+				/>
+
+				{/* Small accent flowers */}
+				<circle
+					cx="68"
+					cy="148"
+					r="4"
+					fill="var(--brand-dusty-rose)"
+					fillOpacity="0.5"
+				/>
+				<circle
+					cx="58"
+					cy="138"
+					r="2.5"
+					fill="var(--brand-dusty-rose)"
+					fillOpacity="0.3"
+				/>
+				<circle
+					cx="244"
+					cy="158"
+					r="4"
+					fill="var(--brand-sage)"
+					fillOpacity="0.5"
+				/>
+				<circle
+					cx="254"
+					cy="148"
+					r="2.5"
+					fill="var(--brand-sage)"
+					fillOpacity="0.3"
+				/>
+
+				{/* Soft abstract silhouette — shoulders + head shape */}
+				<ellipse
+					cx="150"
+					cy="118"
+					rx="34"
+					ry="40"
+					fill="var(--brand-stone)"
+					fillOpacity="0.08"
+				/>
+				<path
+					d="M95 220 C95 185 115 168 150 168 C185 168 205 185 205 220"
+					fill="var(--brand-stone)"
+					fillOpacity="0.06"
+				/>
+
+				{/* Monogram */}
+				<text
+					x="150"
+					y="126"
+					textAnchor="middle"
+					fontFamily="Cormorant Garamond, serif"
+					fontSize="28"
+					fontWeight="300"
+					fontStyle="italic"
+					fill="var(--brand-stone)"
+					fillOpacity="0.35"
+				>
+					CG
+				</text>
+
+				{/* Delicate corner dots */}
+				<circle cx="20" cy="20" r="2" fill="var(--brand-mist)" />
+				<circle cx="280" cy="20" r="2" fill="var(--brand-mist)" />
+				<circle cx="20" cy="280" r="2" fill="var(--brand-mist)" />
+				<circle cx="280" cy="280" r="2" fill="var(--brand-mist)" />
+			</svg>
+		</div>
+	);
+}
 
 export function About() {
 	return (
@@ -10,7 +179,7 @@ export function About() {
 		>
 			<div className="max-w-5xl mx-auto">
 				<div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-					{/* Image — left col */}
+					{/* Illustrated portrait — left col */}
 					<ScrollReveal direction="right">
 						<div className="relative">
 							<div
@@ -18,19 +187,7 @@ export function About() {
 								style={{ background: "var(--brand-linen)" }}
 								aria-hidden
 							/>
-							<div
-								className="w-full aspect-square rounded-[2rem] overflow-hidden border-2"
-								style={{ borderColor: "var(--brand-mist)" }}
-							>
-								<img
-									src={images.about}
-									alt="Dra. Claudia Gomez, psicóloga y terapeuta ACT"
-									className="w-full h-full object-cover"
-									width={400}
-									height={400}
-									loading="lazy"
-								/>
-							</div>
+							<BotanicalPortrait />
 						</div>
 					</ScrollReveal>
 

@@ -33,22 +33,6 @@ describe("Footer", () => {
 		);
 	});
 
-	it("renders the photo credits heading", () => {
-		render(<Footer />);
-		expect(screen.getByText("Créditos fotográficos")).toBeInTheDocument();
-	});
-
-	it("renders photo credit links with no duplicate URLs", () => {
-		render(<Footer />);
-		const creditLinks = Array.from(
-			document.querySelectorAll("a[target='_blank']"),
-		).filter((el) => el.getAttribute("href")?.includes("/photos/"));
-		const hrefs = creditLinks.map((el) => el.getAttribute("href"));
-		const unique = new Set(hrefs);
-		expect(hrefs.length).toBeGreaterThan(0);
-		expect(hrefs.length).toBe(unique.size);
-	});
-
 	it("renders the brand name", () => {
 		render(<Footer />);
 		expect(screen.getByText("Comiendo Prejuicios")).toBeInTheDocument();
@@ -58,5 +42,10 @@ describe("Footer", () => {
 		render(<Footer />);
 		expect(screen.getByText("Dra. Claudia Gomez")).toBeInTheDocument();
 		expect(screen.getByText(/Psicóloga · Terapeuta ACT/)).toBeInTheDocument();
+	});
+
+	it("does not render a photo credits section", () => {
+		render(<Footer />);
+		expect(screen.queryByText("Créditos fotográficos")).not.toBeInTheDocument();
 	});
 });
