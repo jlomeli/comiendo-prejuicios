@@ -8,18 +8,13 @@ Always use `bun` — never `node`, `npm`, `pnpm`, or `yarn`.
 
 | Command | Purpose |
 |---------|---------|
-| `bun --hot src/index.ts` | Dev server with HMR |
-| `bun run build.ts` | Production build (outputs to `dist/`) |
-| `bun tsc --noEmit` | Type check only |
+| `bun run dev` | Dev server (Astro) |
+| `bun run build` | Production build (outputs to `dist/`) |
+| `bun run preview` | Preview production build locally |
+| `astro check` | Type check only |
 | `bun run lint` | Check for lint errors (Biome) |
 | `bun run format` | Auto-format source files (Biome) |
-| `bun run check` | Lint + format + fix in one pass (Biome) |
-
-## Bun-Specific Behavior
-
-- HTML imports (`<script src="./frontend.tsx">` and `import './frontend.tsx'`) are Bun-specific — do not convert to standard module syntax.
-- Bun auto-loads `.env` files — no `dotenv` package needed.
-- `bunfig.toml` configures the Tailwind plugin and env prefix (`BUN_PUBLIC_*` for public env vars).
+| `bun run check` | `astro check` + Biome lint + fix in one pass |
 
 ## Path Aliases
 
@@ -27,6 +22,8 @@ Always use `bun` — never `node`, `npm`, `pnpm`, or `yarn`.
 
 ## Project Structure
 
+- `src/pages/` — Astro pages (`index.astro`)
+- `src/layouts/` — Astro layouts (`Layout.astro`)
 - `src/components/ui/` — shadcn/ui components (new-york style, lucide icons)
 - `src/components/sections/` — page section components
 - `src/lib/` — utilities and shared logic
@@ -48,4 +45,4 @@ Always use `bun` — never `node`, `npm`, `pnpm`, or `yarn`.
 ## Claude Behavior
 
 - Explain tradeoffs when suggesting architectural changes or new dependencies.
-- This is a Bun + React 19 + Tailwind v4 stack — prefer native Bun APIs over Node.js equivalents.
+- This is an Astro 6 + React 19 + Tailwind v4 stack — use Astro conventions (`.astro` files, SSG/SSR boundaries) and prefer Bun as the package manager.
