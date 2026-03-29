@@ -17,7 +17,7 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
 	<Header client:load />
-	<main>
+	<main id="main-content" tabindex="-1">
 		<Hero client:load />
 		<Problem client:visible />
 		<About client:visible />

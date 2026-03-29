@@ -29,3 +29,8 @@ export const AnimatePresence = ({ children }: { children?: ReactNode }) => (
 
 export const useAnimation = () => ({});
 export const useInView = () => [null, false];
+/**
+ * useReducedMotion mock — returns false (animations enabled) in the test environment.
+ * Override with vi.mock("framer-motion", ...) for reduced-motion-specific tests.
+ */
+export const useReducedMotion = () => false;

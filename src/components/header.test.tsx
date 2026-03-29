@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 import { Header } from "./header";
 
@@ -31,13 +32,20 @@ describe("Header", () => {
 
 	it("hamburger button has aria-expanded false by default", () => {
 		render(<Header />);
-		const button = screen.getByRole("button");
+		const button = screen.getByRole("button", { name: "Abrir menú" });
 		expect(button).toHaveAttribute("aria-expanded", "false");
+	});
+
+	it("hamburger button has an accessible label", () => {
+		render(<Header />);
+		expect(
+			screen.getByRole("button", { name: "Abrir menú" }),
+		).toBeInTheDocument();
 	});
 
 	it("clicking the hamburger button opens the mobile menu", async () => {
 		render(<Header />);
-		const button = screen.getByRole("button");
+		const button = screen.getByRole("button", { name: "Abrir menú" });
 		await userEvent.click(button);
 		expect(button).toHaveAttribute("aria-expanded", "true");
 		expect(document.getElementById("mobile-menu")).not.toBeNull();
@@ -45,7 +53,7 @@ describe("Header", () => {
 
 	it("clicking a nav link inside the mobile menu closes it", async () => {
 		render(<Header />);
-		await userEvent.click(screen.getByRole("button"));
+		await userEvent.click(screen.getByRole("button", { name: "Abrir menú" }));
 		expect(document.getElementById("mobile-menu")).not.toBeNull();
 
 		const mobileMenu = document.getElementById("mobile-menu") as HTMLElement;
@@ -64,5 +72,10 @@ describe("Header", () => {
 		for (const link of ctaLinks) {
 			expect(link).toHaveAttribute("href", "#contacto");
 		}
+	});
+
+	it("has no axe violations", async () => {
+		const { container } = render(<Header />);
+		expect(await axe(container)).toHaveNoViolations();
 	});
 });

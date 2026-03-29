@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 import { Faq } from "./faq";
 
@@ -49,5 +50,20 @@ describe("Faq", () => {
 	it("has the correct section id", () => {
 		render(<Faq />);
 		expect(document.getElementById("preguntas")).not.toBeNull();
+	});
+
+	it("each button has aria-controls pointing to its answer panel", () => {
+		render(<Faq />);
+		const buttons = screen.getAllByRole("button");
+		for (const button of buttons) {
+			const panelId = button.getAttribute("aria-controls");
+			expect(panelId).toBeTruthy();
+			expect(document.getElementById(panelId as string)).not.toBeNull();
+		}
+	});
+
+	it("has no axe violations", async () => {
+		const { container } = render(<Faq />);
+		expect(await axe(container)).toHaveNoViolations();
 	});
 });

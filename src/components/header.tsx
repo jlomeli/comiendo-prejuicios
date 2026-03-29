@@ -59,12 +59,13 @@ export function Header() {
 						className="md:hidden p-2 rounded-xl text-foreground hover:bg-muted aria-expanded:bg-muted"
 						aria-expanded={menuOpen}
 						aria-controls="mobile-menu"
+						aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
 						onClick={() => setMenuOpen(!menuOpen)}
 					>
 						{menuOpen ? (
-							<X className="w-5 h-5" />
+							<X className="w-5 h-5" aria-hidden />
 						) : (
-							<Menu className="w-5 h-5" />
+							<Menu className="w-5 h-5" aria-hidden />
 						)}
 					</button>
 				</nav>

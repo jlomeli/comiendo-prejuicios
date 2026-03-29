@@ -44,9 +44,8 @@ export function Footer() {
 								{ href: "#enfoque", label: "Enfoque" },
 								{ href: "#honorarios", label: "Honorarios" },
 								{ href: "#contacto", label: "Contacto" },
-								{ href: "#", label: "Aviso de privacidad" },
 							].map((link) => (
-								<li key={link.href + link.label}>
+								<li key={link.href}>
 									<a
 										href={link.href}
 										className="text-sm font-light transition-opacity duration-500 hover:opacity-60 underline underline-offset-4"
@@ -56,6 +55,15 @@ export function Footer() {
 									</a>
 								</li>
 							))}
+							{/* Placeholder — privacy policy page not yet available; not interactive */}
+							<li>
+								<span
+									className="text-sm font-light underline underline-offset-4 opacity-40 cursor-not-allowed"
+									style={{ color: "var(--brand-mist)" }}
+								>
+									Aviso de privacidad
+								</span>
+							</li>
 						</ul>
 					</nav>
 				</ScrollReveal>

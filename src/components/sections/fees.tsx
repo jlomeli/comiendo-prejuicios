@@ -54,7 +54,8 @@ export function Fees() {
 				</ScrollReveal>
 
 				<ScrollReveal delay={0.1}>
-					<div
+					{/* dl/dt/dd conveys term–value relationships to screen readers (WCAG 1.3.1) */}
+					<dl
 						className="rounded-3xl border overflow-hidden"
 						style={{
 							borderColor: "var(--brand-mist)",
@@ -62,6 +63,7 @@ export function Fees() {
 						}}
 					>
 						{FEE_ITEMS.map((item, i) => (
+							/* div wrapper inside dl is valid HTML; dt/dd must be direct children of it */
 							<div
 								key={item.id}
 								className="px-8 py-6 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-8"
@@ -69,13 +71,11 @@ export function Fees() {
 									borderTop: i === 0 ? "none" : `1px solid var(--brand-mist)`,
 								}}
 							>
-								<div className="sm:w-2/3">
-									<p
-										className="font-serif text-lg font-normal"
-										style={{ color: "var(--brand-stone)" }}
-									>
-										{item.label}
-									</p>
+								<dt
+									className="sm:w-2/3 font-serif text-lg font-normal"
+									style={{ color: "var(--brand-stone)" }}
+								>
+									{item.label}
 									{"note" in item && (
 										<p
 											className="text-sm font-light mt-1 leading-relaxed"
@@ -84,18 +84,16 @@ export function Fees() {
 											{item.note}
 										</p>
 									)}
-								</div>
-								<div className="sm:w-1/3 sm:text-right">
-									<span
-										className="font-serif text-lg font-normal"
-										style={{ color: "var(--brand-terracotta)" }}
-									>
-										{item.value}
-									</span>
-								</div>
+								</dt>
+								<dd
+									className="sm:w-1/3 sm:text-right font-serif text-lg font-normal"
+									style={{ color: "var(--brand-terracotta)" }}
+								>
+									{item.value}
+								</dd>
 							</div>
 						))}
-					</div>
+					</dl>
 				</ScrollReveal>
 
 				<ScrollReveal delay={0.2} className="mt-8 text-center">

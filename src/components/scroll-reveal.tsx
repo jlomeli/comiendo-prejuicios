@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
 interface ScrollRevealProps {
@@ -25,9 +25,21 @@ export function ScrollReveal({
 	once = true,
 	amount = 0.15,
 }: ScrollRevealProps) {
+	/**
+	 * useReducedMotion reads window.matchMedia("(prefers-reduced-motion: reduce)")
+	 * and updates reactively when the OS preference changes.
+	 * When true, content renders immediately without animation (WCAG 2.3.3).
+	 */
+	const shouldReduceMotion = useReducedMotion();
+
 	const offset = directionOffset[direction];
-	const initial = { opacity: 0, ...offset };
+	const initial = shouldReduceMotion
+		? { opacity: 1, x: 0, y: 0 }
+		: { opacity: 0, ...offset };
 	const animate = { opacity: 1, x: 0, y: 0 };
+	const transition = shouldReduceMotion
+		? { duration: 0 }
+		: { duration: 0.6, delay, ease: [0.22, 0.61, 0.36, 1] as const };
 
 	return (
 		<motion.div
@@ -35,11 +47,7 @@ export function ScrollReveal({
 			initial={initial}
 			whileInView={animate}
 			viewport={{ once, amount }}
-			transition={{
-				duration: 0.6,
-				delay,
-				ease: [0.22, 0.61, 0.36, 1],
-			}}
+			transition={transition}
 		>
 			{children}
 		</motion.div>

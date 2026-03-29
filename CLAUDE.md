@@ -54,6 +54,25 @@ Always use `bun` — never `node`, `npm`, `pnpm`, or `yarn`.
 - **Co-locate tests:** place `*.test.ts` / `*.test.tsx` files next to the source file they test
 - **Import test utilities explicitly** — `import { describe, it, expect } from "vitest"` (globals not enabled)
 
+## Accessibility
+
+This project targets **WCAG 2.1 AA** compliance.
+
+### Patterns
+
+- **Skip link:** Static HTML in `Layout.astro` as the first element in `<body>`, targets `<main id="main-content" tabindex="-1">` in `index.astro`. Styled via `.skip-link` in `styles/globals.css`.
+- **Reduced motion:** All `ScrollReveal` usages and inline Framer Motion animations respect `prefers-reduced-motion` via the `useReducedMotion()` hook from Framer Motion. The mock at `src/test/__mocks__/framer-motion.tsx` exports `useReducedMotion = () => false` so tests run with animations enabled.
+- **Focus rings:** A `*:focus-visible` rule in `styles/globals.css` sets `3px solid var(--ring)` globally. Never suppress focus rings with `outline-none` in new components — use `focus-visible:outline-[var(--brand-sage)]` instead.
+- **Form validation:** Use the HTML5 Constraint Validation API (`validity.*`, `validationMessage`) + React state. Add `aria-invalid="true"` and `aria-describedby="field-id-error"` to invalid inputs. Render inline `<p role="alert">` for field errors. Announce form-level status via `<div aria-live="polite">`.
+- **ARIA conventions:** Sections use `aria-labelledby` pointing to their `<h2 id>`. FAQ accordion buttons use `aria-expanded` + `aria-controls` pointing to panel ids (`faq-panel-{id}`); panels use `role="region"` + `aria-labelledby` pointing to button ids (`faq-trigger-{id}`). Icon-only buttons must have `aria-label`; decorative icons get `aria-hidden`.
+- **Semantic markup:** Fee data uses `<dl>/<dt>/<dd>` for screen-reader-accessible term–value pairs.
+
+### Testing
+
+- **`jest-axe`** is installed as a devDependency. Import with `import { axe } from "jest-axe"`. The `toHaveNoViolations()` matcher is available globally via `src/test/setup.ts` (loaded through `import "jest-axe/extend-expect"`).
+- Add `it("has no axe violations", async () => { const { container } = render(<Comp />); expect(await axe(container)).toHaveNoViolations(); })` to every component test file.
+- The Framer Motion mock exports `useReducedMotion = () => false` — tests run with animations enabled. Override with `vi.mock("framer-motion", ...)` for reduced-motion-specific tests.
+
 ## Claude Behavior
 
 - Explain tradeoffs when suggesting architectural changes or new dependencies.
