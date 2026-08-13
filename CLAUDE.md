@@ -77,3 +77,17 @@ This project targets **WCAG 2.1 AA** compliance.
 
 - Explain tradeoffs when suggesting architectural changes or new dependencies.
 - This is an Astro 6 + React 19 + Tailwind v4 stack — use Astro conventions (`.astro` files, SSG/SSR boundaries) and prefer Bun as the package manager.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in this repo's GitHub Issues (`jlomeli/comiendo-prejuicios`), using the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default label vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context — root `CONTEXT.md` + `docs/adr/`. See `docs/agents/domain.md`.
