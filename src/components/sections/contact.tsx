@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
 const CONTACT_METHODS = [
@@ -7,7 +8,54 @@ const CONTACT_METHODS = [
 	{ id: "llamada", label: "Llamada telefónica" },
 ] as const;
 
+type FormErrors = {
+	nombre?: string;
+	correo?: string;
+};
+
+type FormStatus = "idle" | "submitting" | "success";
+
+/** Validates required fields using the HTML5 Constraint Validation API. */
+function validateForm(form: HTMLFormElement): FormErrors {
+	const errors: FormErrors = {};
+	const nombre = form.elements.namedItem("nombre") as HTMLInputElement;
+	const correo = form.elements.namedItem("correo") as HTMLInputElement;
+
+	if (!nombre.validity.valid) {
+		errors.nombre = nombre.validity.valueMissing
+			? "Por favor, escribe tu nombre."
+			: nombre.validationMessage;
+	}
+	if (!correo.validity.valid) {
+		errors.correo = correo.validity.valueMissing
+			? "Por favor, ingresa tu correo electrónico."
+			: correo.validity.typeMismatch
+				? "El correo no parece válido. Ejemplo: tu@correo.com"
+				: correo.validationMessage;
+	}
+	return errors;
+}
+
+const inputClass =
+	"w-full px-4 py-3 rounded-2xl border bg-transparent text-sm transition-colors duration-500 placeholder:opacity-40 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[var(--brand-sage)] focus-visible:outline-offset-0 focus-visible:border-[var(--brand-sage)]";
+
 export function Contact() {
+	const [errors, setErrors] = useState<FormErrors>({});
+	const [status, setStatus] = useState<FormStatus>("idle");
+	// Disable JS-driven animations when user prefers reduced motion (WCAG 2.3.3)
+	const shouldReduceMotion = useReducedMotion();
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const form = e.currentTarget;
+		const newErrors = validateForm(form);
+		setErrors(newErrors);
+		if (Object.keys(newErrors).length > 0) return;
+		setStatus("submitting");
+		// Static form — simulate success after brief delay
+		setTimeout(() => setStatus("success"), 600);
+	};
+
 	return (
 		<section
 			id="contacto"
@@ -35,12 +83,14 @@ export function Contact() {
 					</p>
 				</ScrollReveal>
 
+				{/* Screen-reader-only live region announces form submission status */}
+				<div aria-live="polite" aria-atomic="true" className="sr-only">
+					{status === "success" &&
+						"Tu mensaje fue enviado. Te responderé pronto."}
+				</div>
+
 				<ScrollReveal delay={0.1}>
-					<form
-						className="space-y-6"
-						/* Static form — no action/method */
-						onSubmit={(e) => e.preventDefault()}
-					>
+					<form className="space-y-6" noValidate onSubmit={handleSubmit}>
 						{/* Nombre */}
 						<div className="space-y-2">
 							<label
@@ -57,13 +107,29 @@ export function Contact() {
 								autoComplete="name"
 								required
 								placeholder="¿Cómo te llamas?"
-								className="w-full px-4 py-3 rounded-2xl border bg-transparent text-sm outline-none transition-colors duration-500 placeholder:opacity-40 focus:border-[var(--brand-sage)]"
+								aria-invalid={errors.nombre ? "true" : undefined}
+								aria-describedby={
+									errors.nombre ? "contact-name-error" : undefined
+								}
+								className={inputClass}
 								style={{
-									borderColor: "var(--brand-mist)",
+									borderColor: errors.nombre
+										? "var(--destructive)"
+										: "var(--brand-mist)",
 									color: "var(--brand-stone)",
 									background: "var(--brand-cream)",
 								}}
 							/>
+							{errors.nombre && (
+								<p
+									id="contact-name-error"
+									role="alert"
+									className="text-xs mt-1"
+									style={{ color: "var(--destructive)" }}
+								>
+									{errors.nombre}
+								</p>
+							)}
 						</div>
 
 						{/* Correo */}
@@ -82,13 +148,29 @@ export function Contact() {
 								autoComplete="email"
 								required
 								placeholder="tu@correo.com"
-								className="w-full px-4 py-3 rounded-2xl border bg-transparent text-sm outline-none transition-colors duration-500 placeholder:opacity-40 focus:border-[var(--brand-sage)]"
+								aria-invalid={errors.correo ? "true" : undefined}
+								aria-describedby={
+									errors.correo ? "contact-email-error" : undefined
+								}
+								className={inputClass}
 								style={{
-									borderColor: "var(--brand-mist)",
+									borderColor: errors.correo
+										? "var(--destructive)"
+										: "var(--brand-mist)",
 									color: "var(--brand-stone)",
 									background: "var(--brand-cream)",
 								}}
 							/>
+							{errors.correo && (
+								<p
+									id="contact-email-error"
+									role="alert"
+									className="text-xs mt-1"
+									style={{ color: "var(--destructive)" }}
+								>
+									{errors.correo}
+								</p>
+							)}
 						</div>
 
 						{/* Mensaje */}
@@ -105,7 +187,7 @@ export function Contact() {
 								name="mensaje"
 								rows={4}
 								placeholder="Puedes escribir tanto o tan poco como quieras..."
-								className="w-full px-4 py-3 rounded-2xl border bg-transparent text-sm outline-none resize-none transition-colors duration-500 placeholder:opacity-40 focus:border-[var(--brand-sage)]"
+								className={`${inputClass} resize-none`}
 								style={{
 									borderColor: "var(--brand-mist)",
 									color: "var(--brand-stone)",
@@ -144,13 +226,18 @@ export function Contact() {
 						{/* Submit */}
 						<motion.button
 							type="submit"
-							className="w-full py-4 rounded-2xl text-base font-medium text-white transition-colors duration-500"
+							disabled={status === "submitting" || status === "success"}
+							className="w-full py-4 rounded-2xl text-base font-medium text-white transition-colors duration-500 disabled:opacity-70"
 							style={{ background: "var(--brand-terracotta)" }}
-							whileHover={{ scale: 1.02 }}
-							whileTap={{ scale: 0.98 }}
+							whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
+							whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
 							transition={{ duration: 0.4, ease: "easeInOut" }}
 						>
-							Enviar mensaje
+							{status === "submitting"
+								? "Enviando…"
+								: status === "success"
+									? "¡Mensaje enviado!"
+									: "Enviar mensaje"}
 						</motion.button>
 
 						{/* Crisis note */}

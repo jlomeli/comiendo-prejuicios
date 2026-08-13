@@ -42,8 +42,18 @@ const FAQ_ITEMS = [
 	},
 ] as const;
 
-function FaqItem({ question, answer }: { question: string; answer: string }) {
+function FaqItem({
+	id,
+	question,
+	answer,
+}: {
+	id: string;
+	question: string;
+	answer: string;
+}) {
 	const [open, setOpen] = useState(false);
+	const triggerId = `faq-trigger-${id}`;
+	const panelId = `faq-panel-${id}`;
 
 	return (
 		<div
@@ -51,9 +61,11 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 			style={{ borderColor: "var(--brand-mist)" }}
 		>
 			<button
+				id={triggerId}
 				type="button"
 				className="w-full flex items-center justify-between py-5 text-left gap-4 transition-colors duration-500 hover:opacity-70"
 				aria-expanded={open}
+				aria-controls={panelId}
 				onClick={() => setOpen((prev) => !prev)}
 			>
 				<span
@@ -75,7 +87,9 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 			</button>
 
 			{/* CSS max-height accordion — no JS animation library needed */}
-			<div
+			<section
+				id={panelId}
+				aria-labelledby={triggerId}
 				className="overflow-hidden transition-[max-height] duration-500 ease-in-out"
 				style={{ maxHeight: open ? "400px" : "0px" }}
 			>
@@ -85,7 +99,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 				>
 					{answer}
 				</p>
-			</div>
+			</section>
 		</div>
 	);
 }
@@ -124,6 +138,7 @@ export function Faq() {
 						{FAQ_ITEMS.map((item) => (
 							<FaqItem
 								key={item.id}
+								id={item.id}
 								question={item.question}
 								answer={item.answer}
 							/>

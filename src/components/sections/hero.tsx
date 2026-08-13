@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
 /* Delicate botanical line art — stems, leaves, and seed pods */
@@ -180,6 +180,9 @@ function BotanicalRight() {
 }
 
 export function Hero() {
+	// Disable JS-driven animations when user prefers reduced motion (WCAG 2.3.3)
+	const shouldReduceMotion = useReducedMotion();
+
 	return (
 		<section
 			id="hero"
@@ -249,8 +252,8 @@ export function Hero() {
 						href="#contacto"
 						className="inline-block px-10 py-4 rounded-2xl text-base font-medium text-white transition-colors duration-500"
 						style={{ background: "var(--brand-terracotta)" }}
-						whileHover={{ scale: 1.03 }}
-						whileTap={{ scale: 0.98 }}
+						whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }}
+						whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
 						transition={{ duration: 0.4, ease: "easeInOut" }}
 					>
 						Hablemos
@@ -268,12 +271,16 @@ export function Hero() {
 				</span>
 				<motion.div
 					className="w-px h-8 bg-muted-foreground origin-top"
-					animate={{ scaleY: [0, 1, 0] }}
-					transition={{
-						duration: 2,
-						repeat: Number.POSITIVE_INFINITY,
-						ease: "easeInOut",
-					}}
+					animate={shouldReduceMotion ? { scaleY: 1 } : { scaleY: [0, 1, 0] }}
+					transition={
+						shouldReduceMotion
+							? { duration: 0 }
+							: {
+									duration: 2,
+									repeat: Number.POSITIVE_INFINITY,
+									ease: "easeInOut",
+								}
+					}
 				/>
 			</div>
 		</section>

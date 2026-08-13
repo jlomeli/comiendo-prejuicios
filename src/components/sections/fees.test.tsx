@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 import { Fees } from "./fees";
 
@@ -28,5 +29,10 @@ describe("Fees", () => {
 	it("has the correct section id", () => {
 		render(<Fees />);
 		expect(document.getElementById("honorarios")).not.toBeNull();
+	});
+
+	it("has no axe violations", async () => {
+		const { container } = render(<Fees />);
+		expect(await axe(container)).toHaveNoViolations();
 	});
 });
