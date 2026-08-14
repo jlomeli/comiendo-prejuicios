@@ -31,7 +31,7 @@ export function Footer() {
 						</p>
 						<p
 							className="text-xs mt-1 font-light"
-							style={{ color: "var(--brand-stone-light)" }}
+							style={{ color: "var(--brand-ink-light-on-dark)" }}
 						>
 							Psicóloga · Terapeuta ACT · Ciudad de México
 						</p>
@@ -72,7 +72,7 @@ export function Footer() {
 					<div className="pt-8 border-t" style={{ borderColor: DIVIDER_COLOR }}>
 						<p
 							className="text-xs font-light text-center sm:text-left"
-							style={{ color: "var(--brand-stone-light)" }}
+							style={{ color: "var(--brand-ink-light-on-dark)" }}
 						>
 							© {currentYear} Comiendo Prejuicios. Todos los derechos
 							reservados.
