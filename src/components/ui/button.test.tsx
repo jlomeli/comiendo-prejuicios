@@ -10,16 +10,18 @@ describe("Button", () => {
 		).toBeInTheDocument();
 	});
 
-	it("applies default variant (bg-primary) class", () => {
+	it("applies default variant (Aura gradient) class", () => {
 		render(<Button>Default</Button>);
-		expect(screen.getByRole("button").className).toContain("bg-primary");
+		expect(screen.getByRole("button").className).toContain(
+			"bg-[image:var(--brand-aura-gradient)]",
+		);
 	});
 
 	it("applies outline variant classes", () => {
 		render(<Button variant="outline">Outline</Button>);
 		const button = screen.getByRole("button");
 		expect(button.className).toContain("border");
-		expect(button.className).not.toContain("bg-primary");
+		expect(button.className).not.toContain("brand-aura-gradient");
 	});
 
 	it("applies disabled attribute and opacity when disabled", () => {
