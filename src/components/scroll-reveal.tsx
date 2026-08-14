@@ -10,11 +10,13 @@ interface ScrollRevealProps {
 	amount?: number;
 }
 
+/* "Drift Reveal" — DESIGN.md §5 Content Immersion: a 20px drift + slow
+ * opacity fade, 800ms, cubic-bezier(0.22, 1, 0.36, 1). */
 const directionOffset = {
-	up: { y: 32 },
-	down: { y: -32 },
-	left: { x: 32 },
-	right: { x: -32 },
+	up: { y: 20 },
+	down: { y: -20 },
+	left: { x: 20 },
+	right: { x: -20 },
 };
 
 export function ScrollReveal({
@@ -39,7 +41,7 @@ export function ScrollReveal({
 	const animate = { opacity: 1, x: 0, y: 0 };
 	const transition = shouldReduceMotion
 		? { duration: 0 }
-		: { duration: 0.6, delay, ease: [0.22, 0.61, 0.36, 1] as const };
+		: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as const };
 
 	return (
 		<motion.div

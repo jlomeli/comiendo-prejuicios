@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Comiendo Prejuicios - Terapia ACT y Perspectiva de Género</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Be+Vietnam+Pro:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "inverse-primary": "#f1b8b8",
+                "on-primary": "#ffffff",
+                "on-error": "#ffffff",
+                "tertiary": "#50606f",
+                "on-secondary-fixed-variant": "#574500",
+                "secondary-fixed-dim": "#e9c349",
+                "background": "#fbf9f5",
+                "surface": "#fbf9f5",
+                "on-tertiary-fixed-variant": "#394857",
+                "tertiary-container": "#a1b1c2",
+                "on-surface": "#1b1c1a",
+                "inverse-on-surface": "#f2f0ed",
+                "surface-container-lowest": "#ffffff",
+                "surface-bright": "#fbf9f5",
+                "surface-container": "#efeeea",
+                "surface-container-high": "#eae8e4",
+                "primary-fixed": "#ffdad9",
+                "surface-container-low": "#f5f3ef",
+                "primary-container": "#d8a2a1",
+                "secondary-fixed": "#ffe088",
+                "outline": "#827473",
+                "secondary": "#735c00",
+                "on-background": "#1b1c1a",
+                "surface-container-highest": "#e4e2de",
+                "on-tertiary": "#ffffff",
+                "tertiary-fixed": "#d4e4f6",
+                "on-tertiary-fixed": "#0d1d2a",
+                "primary": "#7f5353",
+                "on-surface-variant": "#504444",
+                "error": "#ba1a1a",
+                "tertiary-fixed-dim": "#b8c8da",
+                "on-secondary": "#ffffff",
+                "surface-dim": "#dbdad6",
+                "secondary-container": "#fed65b",
+                "error-container": "#ffdad6",
+                "on-secondary-container": "#745c00",
+                "on-error-container": "#93000a",
+                "on-primary-fixed": "#311213",
+                "on-primary-container": "#5f3738",
+                "surface-variant": "#e4e2de",
+                "on-primary-fixed-variant": "#643c3c",
+                "outline-variant": "#d4c2c2",
+                "on-secondary-fixed": "#241a00",
+                "primary-fixed-dim": "#f1b8b8",
+                "inverse-surface": "#30312e",
+                "surface-tint": "#7f5353",
+                "on-tertiary-container": "#344452"
+              },
+              fontFamily: {
+                "headline": ["Noto Serif"],
+                "body": ["Be Vietnam Pro"],
+                "label": ["Be Vietnam Pro"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .aura-gradient {
+            background: linear-gradient(135deg, #7f5353 0%, #d8a2a1 100%);
+        }
+        .text-aura-gradient {
+            background: linear-gradient(135deg, #7f5353 0%, #735c00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+      </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="bg-orange-50/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-[0_12px_32px_-4px_rgba(127,83,83,0.08)] docked full-width top-0 sticky z-50">
+<div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-4 font-['Noto_Serif'] antialiased text-stone-700 dark:text-stone-300">
+<a class="text-2xl font-serif italic text-rose-900 dark:text-rose-100 tracking-tight" href="#">Comiendo Prejuicios</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-rose-900 dark:text-rose-200 font-bold border-b-2 border-amber-600/50 pb-1 cursor-pointer active:scale-95 transition-transform" href="#">Inicio</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-rose-800 transition-colors cursor-pointer active:scale-95 transition-transform" href="#servicios">Servicios</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-rose-800 transition-colors cursor-pointer active:scale-95 transition-transform" href="#sobre-mi">Sobre mí</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-rose-800 transition-colors cursor-pointer active:scale-95 transition-transform" href="#enfoque">Enfoque</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-rose-800 transition-colors cursor-pointer active:scale-95 transition-transform" href="#tarifas">Tarifas</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:text-rose-800 transition-colors cursor-pointer active:scale-95 transition-transform" href="#contacto">Contacto</a>
+<button class="aura-gradient text-on-primary px-6 py-2 rounded-lg font-medium hover:shadow-lg transition-all active:scale-95">Pedir Cita</button>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative min-h-[921px] flex items-center pt-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-primary-container/20 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-secondary-container/10 rounded-full blur-[100px]"></div>
+</div>
+<div class="max-w-7xl mx-auto px-8 grid md:grid-cols-12 gap-12 items-center relative z-10">
+<div class="md:col-span-7">
+<span class="inline-block text-secondary font-medium tracking-[0.2em] uppercase mb-4 text-sm">Terapia con alma</span>
+<h1 class="text-5xl md:text-7xl font-headline font-bold text-on-surface-variant leading-[1.1] mb-8 -tracking-[0.02em]">
+                    Un camino hacia la <span class="italic font-normal text-primary">paz</span> contigo misma
+                </h1>
+<p class="text-lg md:text-xl text-on-surface-variant/80 max-w-xl leading-relaxed mb-10">
+                    Acompañamiento psicológico desde la Terapia de Aceptación y Compromiso (ACT) y la perspectiva de género. Un refugio para sanar tu relación con la comida, tu cuerpo y tu propia historia.
+                </p>
+<div class="flex flex-wrap gap-6">
+<button class="aura-gradient text-on-primary px-8 py-4 rounded-lg text-lg font-medium shadow-xl hover:translate-y-[-2px] transition-all">
+                        Comienza tu proceso
+                    </button>
+<button class="text-primary font-semibold flex items-center gap-2 px-4 py-4 hover:bg-surface-container-high rounded-lg transition-colors">
+                        Conocer mi enfoque <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-5 relative">
+<div class="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl rotate-3 bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="Soft sunset light through a window with plants" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCam0Zt8knZ_Cf90rJh0258h-0c25YjHBnls-w-n82Pb_FUTxfefvMRUEzTKDA-lFk9Rm72YVxNs3g7f7_OgZBpNpLAteVxgqjVKwLwK9Y_RUhO9X2wy8HbqfIUN-Nn_RGbAoWoh6KEQavsFti-JEbGC-2Nj72BJGqzwbHGM2dsq-CmODxnkc3U8ho9U4MTVnYZNaZhFCh0uPgB03F1804zlUs0aOVJVwkSzJVvnUF4vOdRJOj76ltNlPg-PWUitnWHsbspvQjav1s"/>
+</div>
+<div class="absolute -bottom-8 -left-8 aspect-square w-48 rounded-full aura-gradient p-1 shadow-xl -rotate-6">
+<div class="bg-surface w-full h-full rounded-full flex flex-col items-center justify-center text-center p-4">
+<span class="text-primary font-headline text-3xl font-bold italic">ACT</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Metodología</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- "Te reconozcas en..." Bento Section -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-headline font-bold text-on-surface mb-4">¿Te sientes identificada?</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Quizás este sea el momento de parar y mirarte con otros ojos. Es probable que...</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="md:col-span-2 bg-surface-container-lowest p-10 rounded-2xl shadow-sm border border-outline-variant/10 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-6" data-icon="restaurant">restaurant</span>
+<h3 class="text-2xl font-headline font-bold mb-4">Sientes que la comida es tu única forma de gestionar lo que sientes</h3>
+<p class="text-on-surface-variant leading-relaxed">El ciclo de restricción y descontrol te agota. Buscas una relación de libertad, no de castigo.</p>
+</div>
+<div class="mt-8 flex gap-2">
+<span class="px-3 py-1 bg-primary-container/20 text-on-primary-container text-xs font-medium rounded-full">Ansiedad</span>
+<span class="px-3 py-1 bg-primary-container/20 text-on-primary-container text-xs font-medium rounded-full">Comida emocional</span>
+</div>
+</div>
+<div class="bg-primary p-10 rounded-2xl shadow-xl flex flex-col justify-center text-on-primary relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-9xl" data-icon="favorite">favorite</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-4 relative z-10">Tu cuerpo se siente como un lugar extraño u hostil</h3>
+<p class="text-on-primary/80 leading-relaxed relative z-10">Has pasado años intentando cambiarlo para "encajar", olvidando que es tu hogar.</p>
+</div>
+<div class="bg-surface-container p-10 rounded-2xl shadow-sm border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6" data-icon="self_improvement">self_improvement</span>
+<h3 class="text-2xl font-headline font-bold mb-4">La autocrítica es la voz que más escuchas a diario</h3>
+<p class="text-on-surface-variant leading-relaxed">Te exiges perfección y te castigas cuando no llegas. Trabajaremos la autocompasión real.</p>
+</div>
+<div class="md:col-span-2 bg-white p-10 rounded-2xl shadow-sm border border-outline-variant/10 flex flex-col md:flex-row gap-8 items-center">
+<div class="flex-1">
+<h3 class="text-2xl font-headline font-bold mb-4">Crees que "cuando adelgaces" empezará tu vida de verdad</h3>
+<p class="text-on-surface-variant leading-relaxed">La vida está ocurriendo ahora. No es un premio por cumplir con los cánones estéticos.</p>
+</div>
+<div class="w-full md:w-48 aspect-video rounded-xl overflow-hidden shadow-md">
+<img class="w-full h-full object-cover" data-alt="Distant horizon with a soft warm sun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAey7zJk7IW15wlG2Een__sgh3SvZHwda7401AUGTKdHLIPe8jqMOnBa-BjNzYKG_TDMCKgTaxs6vAw1xVtgZZ-uLk_Y0L0iQkwUEWWgywHDl-fpCbsfw12j9Q44FMfk2H8hVkE325bLx9FjN-WP1qtvUE1KctzFeKuucK16VIaxBUpvySj-y14Ihyq4_dMufn9bzks9zcrTQsVDNZuL6UX9H0w15wMce0NgwQjxSxPNKP-NE6TcaPNiaRPNjWKY0cbS-tmMC1fQx8"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section - Asymmetric Layout -->
+<section class="py-24 overflow-hidden" id="sobre-mi">
+<div class="max-w-7xl mx-auto px-8 grid md:grid-cols-12 gap-16 items-center">
+<div class="md:col-span-5 relative order-2 md:order-1">
+<div class="absolute -top-12 -left-12 w-64 h-64 border-2 border-primary/20 rounded-full"></div>
+<div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl bg-surface-container-high aspect-[3/4]">
+<img class="w-full h-full object-cover grayscale-[30%]" data-alt="Professional woman looking compassionate and friendly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRqSKEsQUi_C56GMpqggRB6X7rrTd9szjGHzC5S7TMGQh_vsXo6zN1SjTUmniqM1syUmIanmnZvtAOTrow5n63UO82pxXA4eFJmFt-htOEM5IcZZkmPiNf010Ru8Sx7SjzXF9pNT4EoK4ScUrxh6Nc8mPdpCWJs65EEptdzxbAKqPSBDiUC-rNE-zcwV7kkk2bpNb0mkfsS3-rQGxjTf5nRCYulXAl_xA33rvfwFIBNAeswdPAaO46CKIXwsEuEeXcwGiCKTgVQWg"/>
+</div>
+</div>
+<div class="md:col-span-7 order-1 md:order-2">
+<h2 class="text-4xl font-headline font-bold mb-8">Hola, soy Ana. Acompaño procesos de <span class="text-aura-gradient italic">reconexión</span>.</h2>
+<div class="space-y-6 text-on-surface-variant text-lg leading-relaxed">
+<p>Soy psicóloga especializada en trastornos de la conducta alimentaria y trauma, pero sobre todo, soy alguien que cree firmemente en que las personas no estamos "rotas".</p>
+<p>A través de <strong>Comiendo Prejuicios</strong>, busco deconstruir las ideas que nos han hecho odiar nuestra imagen y temer a la comida. Mi enfoque no es la báscula, es tu libertad.</p>
+<p>Utilizo ACT (Terapia de Aceptación y Compromiso) porque nos invita a dejar de luchar contra lo que sentimos y empezar a caminar hacia lo que de verdad nos importa.</p>
+</div>
+<div class="mt-12 grid grid-cols-2 gap-8 border-t border-outline-variant/30 pt-8">
+<div>
+<span class="block text-3xl font-headline font-bold text-primary">8+</span>
+<span class="text-sm uppercase tracking-widest text-on-surface-variant/60">Años de experiencia</span>
+</div>
+<div>
+<span class="block text-3xl font-headline font-bold text-primary">500+</span>
+<span class="text-sm uppercase tracking-widest text-on-surface-variant/60">Vidas acompañadas</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ACT Approach Section -->
+<section class="py-32 bg-primary text-on-primary relative overflow-hidden" id="enfoque">
+<div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+<svg class="w-full h-full" viewbox="0 0 100 100"><path d="M0,50 Q25,25 50,50 T100,50" fill="none" stroke="currentColor" stroke-width="0.5"></path></svg>
+</div>
+<div class="max-w-4xl mx-auto px-8 text-center relative z-10">
+<span class="material-symbols-outlined text-6xl mb-8" data-icon="auto_awesome">auto_awesome</span>
+<h2 class="text-4xl md:text-6xl font-headline font-bold mb-10 leading-tight">No se trata de arreglarte. <br/><span class="italic font-normal text-primary-fixed">Se trata de tu libertad.</span></h2>
+<p class="text-xl md:text-2xl text-on-primary/80 font-light leading-relaxed mb-12">
+                En ACT no buscamos eliminar el malestar por arte de magia, sino cambiar tu relación con él. Para que el miedo, la duda o la tristeza ya no sean quienes lleven el volante de tu vida.
+            </p>
+<div class="grid md:grid-cols-3 gap-8 text-left mt-16">
+<div class="bg-on-primary/10 p-8 rounded-xl backdrop-blur-sm border border-on-primary/20">
+<h4 class="font-headline font-bold mb-3">Aceptación</h4>
+<p class="text-sm text-on-primary/70">Dejar de pelear con lo que ya está ahí para ahorrar energía vital.</p>
+</div>
+<div class="bg-on-primary/10 p-8 rounded-xl backdrop-blur-sm border border-on-primary/20">
+<h4 class="font-headline font-bold mb-3">Mindfulness</h4>
+<p class="text-sm text-on-primary/70">Habitar el presente sin juicios, incluso cuando es incómodo.</p>
+</div>
+<div class="bg-on-primary/10 p-8 rounded-xl backdrop-blur-sm border border-on-primary/20">
+<h4 class="font-headline font-bold mb-3">Valores</h4>
+<p class="text-sm text-on-primary/70">Descubrir qué te importa de verdad y actuar en esa dirección.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Process Section -->
+<section class="py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="mb-20">
+<h2 class="text-4xl font-headline font-bold mb-4">Nuestro proceso</h2>
+<div class="w-24 h-1 aura-gradient rounded-full"></div>
+</div>
+<div class="space-y-24">
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="w-full md:w-1/2">
+<div class="text-8xl font-headline font-bold text-surface-container-high mb-[-2rem] ml-[-1rem] select-none">01</div>
+<h3 class="text-2xl font-headline font-bold mb-4 relative z-10">Sesión de valoración</h3>
+<p class="text-on-surface-variant leading-relaxed">Un primer encuentro de 20 minutos gratuito para conocernos, que me cuentes qué necesitas y ver si mi forma de trabajar resuena contigo.</p>
+</div>
+<div class="w-full md:w-1/2 aspect-video rounded-3xl bg-surface-container-low overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Hands holding a warm mug of tea" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqxpts8aBgNHwsJO5WiTA922sUb1mogMHxemdwehlq9M2z_aX7GahVDfPVg0w2tytrmZuDDVZv2Jol2dgxWr2efJN2EMXgQkGNJXQ8F6YWXix_ygjNDP6EVYVELujYfQZgTvVuEcUjIIiR7dndwMu_LJSaVYAX6sHwTbsieW2-APTa7jJgiXEL6jCckJ2_8_M06dik0T-6LCiXkKgF07U9qRSeRwf25HWI0WWTxOkqPa0zIdEYdioK3w8ONGih6M81aKVQHRp-5jA"/>
+</div>
+</div>
+<div class="flex flex-col md:flex-row-reverse gap-12 items-center">
+<div class="w-full md:w-1/2">
+<div class="text-8xl font-headline font-bold text-surface-container-high mb-[-2rem] ml-[-1rem] select-none">02</div>
+<h3 class="text-2xl font-headline font-bold mb-4 relative z-10">Evaluación y Mapa</h3>
+<p class="text-on-surface-variant leading-relaxed">No hay dos procesos iguales. Dedicaremos las primeras sesiones a entender tu historia y trazar un mapa de hacia dónde queremos caminar juntas.</p>
+</div>
+<div class="w-full md:w-1/2 aspect-video rounded-3xl bg-surface-container-low overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Open notebook and a pencil on a clean desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQyO_fWDCYPptleAvEzF2BsAfvXfyXjFlkA_ynx8UhmbEn_8OvaAf2fzLMNz776L7bWuFOtgdLfu8QJ3RLRlSBQPkNAyrrwoBP0Vf1SX6wK_qUNLIFtjiGsp9jGGNL9NBSsATm8f9BtHfsmA8BtdH2y_qXDXU2ZCCL7RC86Zc4ve4cI6lgUxINPiDblZEFpsDA8HAEIvR7XzL4LNzSKzfRR_-wMkyYrcHgl3RLACVivR-7GJ_S9bEEy78yPqv9Gf3CwAIcAzo2G2c"/>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="w-full md:w-1/2">
+<div class="text-8xl font-headline font-bold text-surface-container-high mb-[-2rem] ml-[-1rem] select-none">03</div>
+<h3 class="text-2xl font-headline font-bold mb-4 relative z-10">Sesiones de camino</h3>
+<p class="text-on-surface-variant leading-relaxed">Trabajo semanal o quincenal. Sesiones de 50 minutos donde usamos herramientas de ACT para ganar flexibilidad psicológica y bienestar real.</p>
+</div>
+<div class="w-full md:w-1/2 aspect-video rounded-3xl bg-surface-container-low overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Sunlight hitting a white wall through plant shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0VieRUCJNbfb6uHqneeYXgS_g0b7vTDYwokTeoCwI6JEwdRJaiRU-W8fQ1q8dc65kSm5qwwcMdnqvtOG8zIp6Avt1pkMrF2yHn8gfJWPTtJO_nr_7TlrxHFAUtozue0UXTZ6SKjUfz3hGCVFyyx1sXNOFFD9rFX5ZTigiBI9PKY7P2qWReA1tZ8jH8h7u2FxWPj5D76Ns1ZHm9yKx-jFN-L1U1nnQQaGZX3Z4otOes3YkaDAQxgcAdRQwNfSKQ3jj4GmFYmjd9WI"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Fees Section -->
+<section class="py-24 bg-surface-container-low" id="tarifas">
+<div class="max-w-4xl mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-headline font-bold mb-4">Inversión en ti</h2>
+<p class="text-on-surface-variant">La terapia es un compromiso contigo misma y con tu futuro.</p>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="bg-surface p-10 rounded-2xl shadow-sm border border-outline-variant/10">
+<h3 class="text-xl font-headline font-bold mb-2">Sesión Individual</h3>
+<p class="text-on-surface-variant text-sm mb-6">Online (Zoom) o presencial</p>
+<div class="text-4xl font-headline font-bold text-primary mb-6">65€ <span class="text-sm font-body text-on-surface-variant/60">/ sesión</span></div>
+<ul class="space-y-3 text-sm text-on-surface-variant mb-8">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm" data-icon="check">check</span> Duración: 50-60 minutos</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm" data-icon="check">check</span> Material de apoyo entre sesiones</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm" data-icon="check">check</span> Acompañamiento vía email</li>
+</ul>
+<button class="w-full py-3 rounded-lg border border-primary text-primary font-medium hover:bg-primary hover:text-on-primary transition-all">Solicitar Sesión</button>
+</div>
+<div class="bg-primary-container/10 p-10 rounded-2xl shadow-sm border border-primary-container/30 relative">
+<div class="absolute top-4 right-4 bg-secondary text-on-secondary px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest">Recomendado</div>
+<h3 class="text-xl font-headline font-bold mb-2">Bono 4 Sesiones</h3>
+<p class="text-on-surface-variant text-sm mb-6">Para procesos de continuidad</p>
+<div class="text-4xl font-headline font-bold text-primary mb-6">240€ <span class="text-sm font-body text-on-surface-variant/60">/ 4 sesiones</span></div>
+<ul class="space-y-3 text-sm text-on-surface-variant mb-8">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm" data-icon="check">check</span> Ahorro de 20€ sobre tarifa individual</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm" data-icon="check">check</span> Prioridad en agenda semanal</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm" data-icon="check">check</span> Seguimiento personalizado intensivo</li>
+</ul>
+<button class="w-full aura-gradient text-on-primary py-3 rounded-lg font-medium shadow-lg transition-all">Elegir Bono</button>
+</div>
+</div>
+<p class="text-center mt-12 text-on-surface-variant/60 text-sm italic">
+                * Si te encuentras en una situación económica precaria, escríbeme. Reservo dos plazas mensuales para tarifas reducidas.
+            </p>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex justify-between items-end mb-16">
+<div>
+<h2 class="text-4xl font-headline font-bold mb-4">Voces del camino</h2>
+<p class="text-on-surface-variant">Lo que dicen quienes ya han transitado este proceso.</p>
+</div>
+<div class="hidden md:flex gap-4">
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="bg-surface-container-low p-8 rounded-2xl italic text-on-surface-variant leading-relaxed relative">
+<span class="text-6xl text-primary-container absolute -top-4 -left-2 opacity-30 font-serif">“</span>
+                    "Ana me enseñó que mi cuerpo no era el problema, sino la forma en que me hablaba a mí misma. Ha sido un antes y un después en mi relación con la comida."
+                    <div class="mt-8 not-italic flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/30"></div>
+<div>
+<p class="font-bold text-sm">Elena R.</p>
+<p class="text-xs text-on-surface-variant/60">Terapia online</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 rounded-2xl italic text-on-surface-variant leading-relaxed relative">
+<span class="text-6xl text-primary-container absolute -top-4 -left-2 opacity-30 font-serif">“</span>
+                    "Por primera vez siento que no estoy a dieta, sino que estoy viviendo. El enfoque ACT me ha dado herramientas para cuando la ansiedad aprieta."
+                    <div class="mt-8 not-italic flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30"></div>
+<div>
+<p class="font-bold text-sm">Marta S.</p>
+<p class="text-xs text-on-surface-variant/60">6 meses de proceso</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 rounded-2xl italic text-on-surface-variant leading-relaxed relative">
+<span class="text-6xl text-primary-container absolute -top-4 -left-2 opacity-30 font-serif">“</span>
+                    "Un espacio seguro, sin juicios y con muchísima compasión. Ana es una profesional increíble que entiende la presión que sufrimos las mujeres."
+                    <div class="mt-8 not-italic flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/30"></div>
+<div>
+<p class="font-bold text-sm">Carla M.</p>
+<p class="text-xs text-on-surface-variant/60">Terapia presencial</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ -->
+<section class="py-24 bg-surface-container-high/30">
+<div class="max-w-3xl mx-auto px-8">
+<h2 class="text-3xl font-headline font-bold mb-12 text-center">Preguntas frecuentes</h2>
+<div class="space-y-4">
+<details class="group bg-surface rounded-xl border border-outline-variant/10 overflow-hidden shadow-sm" open="">
+<summary class="p-6 cursor-pointer list-none flex justify-between items-center font-bold text-on-surface-variant">
+                        ¿Cuánto tiempo dura el proceso de terapia?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-6 pb-6 text-on-surface-variant/80 text-sm leading-relaxed">
+                        No hay una respuesta única. Depende de tus necesidades y objetivos. Algunas personas encuentran alivio en 12-15 sesiones, otras prefieren un acompañamiento a largo plazo. Lo decidiremos juntas paso a paso.
+                    </div>
+</details>
+<details class="group bg-surface rounded-xl border border-outline-variant/10 overflow-hidden shadow-sm">
+<summary class="p-6 cursor-pointer list-none flex justify-between items-center font-bold text-on-surface-variant">
+                        ¿Es efectiva la terapia online?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-6 pb-6 text-on-surface-variant/80 text-sm leading-relaxed">
+                        Absolutamente. La evidencia científica muestra que la eficacia es idéntica a la presencial. Solo necesitas un lugar tranquilo, una buena conexión y ganas de trabajar.
+                    </div>
+</details>
+<details class="group bg-surface rounded-xl border border-outline-variant/10 overflow-hidden shadow-sm">
+<summary class="p-6 cursor-pointer list-none flex justify-between items-center font-bold text-on-surface-variant">
+                        ¿Trabajas con adolescentes?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-6 pb-6 text-on-surface-variant/80 text-sm leading-relaxed">
+                        Sí, a partir de los 16 años. En el caso de menores, siempre se requiere una primera entrevista con los progenitores o tutores legales.
+                    </div>
+</details>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-24 bg-surface" id="contacto">
+<div class="max-w-7xl mx-auto px-8">
+<div class="bg-surface-container-low rounded-[3rem] overflow-hidden shadow-xl grid md:grid-cols-2">
+<div class="p-12 md:p-20 aura-gradient text-on-primary">
+<h2 class="text-4xl font-headline font-bold mb-8">Da el primer paso hacia tu calma</h2>
+<p class="text-on-primary/80 mb-12 text-lg">Escríbeme sin compromiso. Estaré encantada de escucharte y resolver tus dudas.</p>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span>hola@comiendoprejuicios.com</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span>Calle de la Serenidad 12, Madrid</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined" data-icon="smartphone">smartphone</span>
+<span>+34 600 000 000</span>
+</div>
+</div>
+<div class="mt-16 flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<img class="w-5 h-5" data-alt="Instagram icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVsUxkNKBsRioqUB0K6_1LxNwaB1FH4FzPFIbrbJITUAEw1bvtHVWbrXRiWprIqvF9VI44KwsG-qJ4Eb5mAWQJej-wrQXO41auSHyoUdRQcfAkpdt_2_wST9z3z74HI13j_BnpXQ6rJ_7U33V5Ii8NUnnLk6RZypoAtczGxBGCp0giPkqECWNu6_Cc3DierNnTRvMjv502iU5Njc8HaVTtSLXH1M1mQYZ5o0aVYvxviUafOi5Qtj7_yln53e1rdr_DZKMQ1f9UXnM"/>
+</a>
+</div>
+</div>
+<div class="p-12 md:p-20 bg-surface">
+<form class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-2">Nombre completo</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-secondary transition-all py-3 px-0 placeholder:text-on-surface-variant/40" placeholder="Tu nombre..." type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-2">Email</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-secondary transition-all py-3 px-0 placeholder:text-on-surface-variant/40" placeholder="tu@email.com" type="email"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-2">¿En qué puedo ayudarte?</label>
+<textarea class="w-full bg-transparent border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-secondary transition-all py-3 px-0 placeholder:text-on-surface-variant/40 resize-none" placeholder="Cuéntame brevemente..." rows="4"></textarea>
+</div>
+<div class="flex items-start gap-3 mt-4">
+<input class="mt-1 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-xs text-on-surface-variant/60">Acepto la política de privacidad y el tratamiento de mis datos para esta consulta.</span>
+</div>
+<button class="w-full aura-gradient text-on-primary py-4 rounded-lg font-bold shadow-xl hover:translate-y-[-2px] transition-all" type="submit">Enviar Mensaje</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<section class="py-24 bg-surface-container-low relative overflow-hidden">
+<div class="max-w-4xl mx-auto px-8 text-center">
+<div class="mb-12">
+<h2 class="text-4xl font-headline font-bold text-on-surface mb-6">¿Deseas recibir calma en tu correo?</h2>
+<p class="text-lg text-on-surface-variant/80 leading-relaxed max-w-2xl mx-auto">
+        Suscríbete para recibir reflexiones semanales, herramientas de ACT y un espacio de calma directamente en tu bandeja de entrada.
+      </p>
+</div>
+<form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto mb-6">
+<input class="flex-1 bg-surface border-outline-variant/30 rounded-lg px-6 py-4 focus:ring-primary focus:border-primary transition-all placeholder:text-on-surface-variant/40" placeholder="tu@email.com" required="" type="email"/>
+<button class="aura-gradient text-on-primary px-8 py-4 rounded-lg font-bold shadow-lg hover:translate-y-[-2px] transition-all active:scale-95" type="submit">
+        Unirme
+      </button>
+</form>
+<p class="text-sm text-on-surface-variant/60 italic">
+      Respetamos tu privacidad. Sin spam, solo herramientas para sanar.
+    </p>
+</div>
+<!-- Decorative elements to match the theme -->
+<div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<path d="M0,50 Q25,25 50,50 T100,50" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+</svg>
+</div>
+</section><footer class="bg-stone-100 dark:bg-stone-950 full-width mt-20 tonal-shift-bg flat-no-shadows">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-6 font-['Be_Vietnam_Pro'] text-sm tracking-wide text-stone-500 dark:text-stone-400">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-serif italic text-lg text-rose-900 dark:text-rose-100">Comiendo Prejuicios</span>
+<p>© 2024 Comiendo Prejuicios. Terapia con enfoque ACT y perspectiva de género.</p>
+</div>
+<div class="flex gap-8 items-center">
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-700 hover:underline decoration-amber-500/30 underline-offset-4 transition-all duration-500 ease-in-out" href="#">Aviso Legal</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-700 hover:underline decoration-amber-500/30 underline-offset-4 transition-all duration-500 ease-in-out" href="#">Privacidad</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-700 hover:underline decoration-amber-500/30 underline-offset-4 transition-all duration-500 ease-in-out" href="#">Cookies</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-700 hover:underline decoration-amber-500/30 underline-offset-4 transition-all duration-500 ease-in-out" href="#">Instagram</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -2,17 +2,23 @@
 @import "tw-animate-css";
 
 /* ============================================================
-   Brand: "Luz de tarde" — Afternoon Light
-   Warm amber filtering through soft linen. Earthy, still, held.
+   Brand: "Luz de Atardecer" — Sunset Light
+   Creative North Star: "The Ethereal Editorial." Tonal depth over
+   high-contrast separation — a UI that behaves like natural light
+   crossing a room at the end of the day. Hopeful, quiet, human.
    Target: Adult women 25-50 navigating eating disorders, trauma,
    neurodivergence. Safe first. Competent second.
+
+   Supersedes the prior "Luz de tarde" brand in full — see
+   docs/adr/0002-full-brand-replacement-luz-de-atardecer.md.
+   Source: docs/design/DESIGN.md, docs/design/PRD.md.
    ============================================================ */
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Noto Serif", ui-serif, Georgia, serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -51,15 +57,43 @@
 }
 
 :root {
-  /* ── Brand palette ──────────────────────────────────────── */
-  --brand-cream:       #F7F3EE;   /* page background */
-  --brand-linen:       #EDE8E0;   /* cards, secondary bg */
-  --brand-stone:       #4A4540;   /* body text, foreground */
-  --brand-stone-light: #8C8480;   /* muted text, placeholders */
-  --brand-sage:        #7B9E87;   /* primary, links, focus */
-  --brand-dusty-rose:  #C9A09A;   /* warm hover states */
-  --brand-terracotta:  #B85C45;   /* CTA buttons only */
-  --brand-mist:        #D4CFC8;   /* borders, dividers */
+  /* ── Brand palette: "The Sunset Spectrum" ───────────────────
+     Tonal depth, not high-contrast separation — color simulates
+     the behavior of natural light. DESIGN.md §2, §4. */
+  --brand-rose:           #7F5353;   /* primary — brand moments, key headings, CTAs (the heart of the sunset) */
+  --brand-gold:           #735C00;   /* secondary — "Golden Hour" accents: focus glow, pagination dots, bullets */
+  --brand-slate:          #50606F;   /* tertiary — the cooling sky; grounding/secondary information */
+  --brand-cream:          #FBF9F5;   /* surface — our "Paper" base, page background */
+  --brand-blush:          #D8A2A1;   /* primary_container — soft backgrounds, Aura gradient end */
+  --brand-ink:            #504444;   /* on_surface_variant — body text; never pure black */
+  --brand-ink-light:      #7B7170;   /* muted text, placeholders — 4.5:1 on cream */
+  --brand-ink-light-on-dark: #BFBAB7; /* muted text on an --brand-ink surface (e.g. the footer) — 4.85:1 on ink. --brand-ink-light is calibrated for cream backgrounds and falls to ~2:1 here, so it needs its own token rather than reuse. */
+  --brand-surface-low:    #F5F3EF;   /* surface-container-low — nested sections, cards */
+  --brand-surface:        #EFEEEA;   /* surface-container — inner modules */
+  --brand-surface-lowest: #FFFFFF;   /* surface-container-lowest — floating components */
+  --brand-ghost-border:   #D4C2C2;   /* outline_variant — use at 15% opacity only, per the "No-Line Rule" */
+  --brand-error:          #BA1A1A;
+
+  /* Signature texture: the "Aura" gradient (135deg, primary → primary_container).
+     Hero sections and primary CTAs only — DESIGN.md §2. */
+  --brand-aura-gradient: linear-gradient(135deg, var(--brand-rose), var(--brand-blush));
+
+  /* Ambient shadow — tinted with the primary rose, never a flat black drop shadow. */
+  --brand-shadow-ambient: 0 12px 32px -4px rgba(127, 83, 83, 0.08);
+
+  /* ── Deprecated aliases ──────────────────────────────────────
+     Old "Luz de tarde" brand variable names, repointed to their
+     nearest Luz de Atardecer equivalent so sections not yet
+     migrated (tracked in #12, #13, #14) keep rendering. Each
+     name is removed once its last consumer migrates to the
+     canonical --brand-* names above. */
+  --brand-linen:       var(--brand-surface-low);
+  --brand-stone:       var(--brand-ink);
+  --brand-stone-light: var(--brand-ink-light);
+  --brand-sage:        var(--brand-rose);
+  --brand-dusty-rose:  var(--brand-blush);
+  --brand-terracotta:  var(--brand-rose); /* CTAs use the primary Aura gradient, not gold — DESIGN.md §5 Buttons */
+  --brand-mist:        var(--brand-ghost-border);
 
   /* ── Tailwind semantic tokens ───────────────────────────── */
   --radius: 1.5rem;
@@ -67,78 +101,81 @@
   --radius-xl: 2.5rem;
   --radius-full: 9999px;
 
-  --background:          #F7F3EE;
-  --foreground:          #4A4540;
-  --card:                #EDE8E0;
-  --card-foreground:     #4A4540;
-  --popover:             #EDE8E0;
-  --popover-foreground:  #4A4540;
-  --primary:             #7B9E87;
-  --primary-foreground:  #F7F3EE;
-  --secondary:           #EDE8E0;
-  --secondary-foreground:#4A4540;
-  --muted:               #F2EDE8;
-  --muted-foreground:    #8C8480;
-  --accent:              #C9A09A;
-  --accent-foreground:   #4A4540;
-  --destructive:         #C0492C;
-  --border:              #D4CFC8;
-  --input:               #D4CFC8;
-  --ring:                #7B9E87;
+  --background:          var(--brand-cream);
+  --foreground:          var(--brand-ink);
+  --card:                var(--brand-surface-low);
+  --card-foreground:     var(--brand-ink);
+  --popover:             var(--brand-surface-lowest);
+  --popover-foreground:  var(--brand-ink);
+  --primary:             var(--brand-rose);
+  --primary-foreground:  #FFFFFF;
+  --secondary:           var(--brand-blush);
+  --secondary-foreground:var(--brand-ink);
+  --muted:               var(--brand-surface);
+  --muted-foreground:    var(--brand-ink-light);
+  --accent:              var(--brand-gold);
+  --accent-foreground:   #FFFFFF;
+  --destructive:         var(--brand-error);
+  --border:              rgba(212, 194, 194, 0.15); /* ghost border, 15% opacity per the "No-Line Rule" */
+  --input:               rgba(212, 194, 194, 0.15);
+  --ring:                var(--brand-gold);
 
-  --chart-1: #7B9E87;
-  --chart-2: #C9A09A;
-  --chart-3: #B85C45;
-  --chart-4: #EDE8E0;
-  --chart-5: #4A4540;
+  --chart-1: var(--brand-rose);
+  --chart-2: var(--brand-blush);
+  --chart-3: var(--brand-gold);
+  --chart-4: var(--brand-slate);
+  --chart-5: var(--brand-ink);
 
-  --sidebar:                  #F7F3EE;
-  --sidebar-foreground:       #4A4540;
-  --sidebar-primary:          #7B9E87;
-  --sidebar-primary-foreground:#F7F3EE;
-  --sidebar-accent:           #EDE8E0;
-  --sidebar-accent-foreground:#4A4540;
-  --sidebar-border:           #D4CFC8;
-  --sidebar-ring:             #7B9E87;
+  --sidebar:                  var(--brand-cream);
+  --sidebar-foreground:       var(--brand-ink);
+  --sidebar-primary:          var(--brand-rose);
+  --sidebar-primary-foreground:#FFFFFF;
+  --sidebar-accent:           var(--brand-surface-low);
+  --sidebar-accent-foreground:var(--brand-ink);
+  --sidebar-border:           rgba(212, 194, 194, 0.15);
+  --sidebar-ring:              var(--brand-gold);
 
   /* ── Hero organic shapes ────────────────────────────────── */
-  --organic-blob:   #E8EFE8;   /* soft sage tint */
-  --organic-blob-2: #F5EBE0;   /* warm amber tint */
+  --organic-blob:   #F3E9E7;   /* soft rose tint */
+  --organic-blob-2: #F5F0DE;   /* soft gold tint */
 }
 
 .dark {
-  /* Warm dark: deep espresso + soft candlelight */
-  --background:          #2A2420;
-  --foreground:          #F0EBE3;
-  --card:                #362F2B;
-  --card-foreground:     #F0EBE3;
-  --popover:             #362F2B;
-  --popover-foreground:  #F0EBE3;
-  --primary:             #9AB8A6;
-  --primary-foreground:  #2A2420;
-  --secondary:           #403830;
-  --secondary-foreground:#F0EBE3;
-  --muted:               #3A322E;
-  --muted-foreground:    #B0A8A0;
-  --accent:              #D4ABA5;
-  --accent-foreground:   #2A2420;
-  --destructive:         #D9614A;
-  --border:              #50443E;
-  --input:               #50443E;
-  --ring:                #9AB8A6;
-  --chart-1: #9AB8A6;
-  --chart-2: #D4ABA5;
-  --chart-3: #D9614A;
-  --chart-4: #403830;
-  --chart-5: #F0EBE3;
-  --sidebar:                  #2A2420;
-  --sidebar-foreground:       #F0EBE3;
-  --sidebar-primary:          #9AB8A6;
-  --sidebar-primary-foreground:#2A2420;
-  --sidebar-accent:           #403830;
-  --sidebar-accent-foreground:#F0EBE3;
-  --sidebar-border:           #50443E;
-  --sidebar-ring:             #9AB8A6;
+  /* Sunset at night: deep warm umber + candlelit rose and gold.
+     Currently unreachable (no theme toggle exists in the UI) —
+     kept in sync with the light palette for parity, not actively
+     designed against by docs/design/DESIGN.md. */
+  --background:          #2A2220;
+  --foreground:          #F3ECE6;
+  --card:                #362D2A;
+  --card-foreground:     #F3ECE6;
+  --popover:             #362D2A;
+  --popover-foreground:  #F3ECE6;
+  --primary:             #D8A2A1;
+  --primary-foreground:  #2A2220;
+  --secondary:           #4A3835;
+  --secondary-foreground:#F3ECE6;
+  --muted:               #3A302C;
+  --muted-foreground:    #B8A9A5;
+  --accent:              #C9A227;
+  --accent-foreground:   #2A2220;
+  --destructive:         #FF6B57;
+  --border:              rgba(212, 194, 194, 0.18);
+  --input:               rgba(212, 194, 194, 0.18);
+  --ring:                #C9A227;
+  --chart-1: #D8A2A1;
+  --chart-2: #C9A227;
+  --chart-3: #8C7A78;
+  --chart-4: #4A3835;
+  --chart-5: #F3ECE6;
+  --sidebar:                  #2A2220;
+  --sidebar-foreground:       #F3ECE6;
+  --sidebar-primary:          #D8A2A1;
+  --sidebar-primary-foreground:#2A2220;
+  --sidebar-accent:           #4A3835;
+  --sidebar-accent-foreground:#F3ECE6;
+  --sidebar-border:           rgba(212, 194, 194, 0.18);
+  --sidebar-ring:             #C9A227;
 }
 
 @layer base {
@@ -149,7 +186,7 @@
     left: 1rem;
     z-index: 9999;
     padding: 0.75rem 1.5rem;
-    background: var(--brand-stone);
+    background: var(--brand-ink);
     color: var(--brand-cream);
     font-family: var(--font-sans);
     font-size: 0.875rem;
@@ -160,14 +197,17 @@
   }
   .skip-link:focus {
     top: 0;
-    outline: 3px solid var(--brand-sage);
+    outline: 3px solid var(--brand-gold);
     outline-offset: 2px;
   }
 
   * {
     @apply border-border outline-ring/50;
   }
-  /* Strengthen focus indicators to meet WCAG 2.4.7 and 2.4.11 (3:1 contrast, 3px minimum) */
+  /* Strengthen focus indicators to meet WCAG 2.4.7 and 2.4.11 (3:1 contrast, 3px
+     minimum). This is a hard requirement of this project — DESIGN.md's softer
+     per-component focus treatments (e.g. the input "glow") layer on top of this,
+     they never replace it. See docs/adr/0003-accessibility-overrides-brand-spec-on-focus-states.md */
   *:focus-visible {
     outline: 3px solid var(--ring);
     outline-offset: 2px;
@@ -180,7 +220,8 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  /* Breathing motion — ease-in-out, 400-700ms, never abrupt */
+  /* Breathing motion — ease-in-out, ~800ms "Drift Reveal", never abrupt.
+     DESIGN.md §5 Content Immersion. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
