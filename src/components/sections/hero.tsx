@@ -1,181 +1,86 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
-/* Delicate botanical line art — stems, leaves, and seed pods */
-function BotanicalLeft() {
+/**
+ * Hero image placeholder — an illustrated stand-in for the "warm, natural
+ * photography (plants/sunlight)" PRD §2 calls for. No photo-generation
+ * tooling is available in this environment, so this ships as a tasteful
+ * abstract panel (Aura gradient + soft light motif) rather than a faked
+ * photo. Swap for real photography — tracked in #15.
+ */
+function HeroImagePlaceholder() {
 	return (
-		<svg
-			viewBox="0 0 220 480"
-			fill="none"
-			role="presentation"
-			aria-hidden
-			className="absolute bottom-0 left-0 w-40 sm:w-56 opacity-25 pointer-events-none select-none"
-		>
-			{/* Main stem */}
-			<path
-				d="M40 480 C45 400 35 360 50 300 C60 250 40 200 55 140 C65 95 55 50 70 10"
-				stroke="var(--brand-sage)"
-				strokeWidth="1.2"
-				strokeLinecap="round"
-			/>
-			{/* Left branch 1 */}
-			<path
-				d="M52 310 C30 295 10 270 5 250"
-				stroke="var(--brand-sage)"
-				strokeWidth="1"
-				strokeLinecap="round"
-			/>
-			<path
-				d="M5 250 C25 248 40 235 45 220"
-				stroke="var(--brand-sage)"
-				strokeWidth="0.8"
-				strokeLinecap="round"
-			/>
-			{/* Right branch 1 */}
-			<path
-				d="M52 270 C75 255 90 235 95 210"
-				stroke="var(--brand-sage)"
-				strokeWidth="1"
-				strokeLinecap="round"
-			/>
-			<ellipse
-				cx="97"
-				cy="204"
-				rx="12"
-				ry="22"
-				transform="rotate(-25 97 204)"
-				stroke="var(--brand-sage)"
-				strokeWidth="0.8"
-				fill="var(--brand-sage)"
-				fillOpacity="0.08"
-			/>
-			{/* Left branch 2 */}
-			<path
-				d="M53 220 C32 200 18 185 8 165"
-				stroke="var(--brand-sage)"
-				strokeWidth="1"
-				strokeLinecap="round"
-			/>
-			<ellipse
-				cx="5"
-				cy="158"
-				rx="10"
-				ry="20"
-				transform="rotate(15 5 158)"
-				stroke="var(--brand-sage)"
-				strokeWidth="0.8"
-				fill="var(--brand-sage)"
-				fillOpacity="0.06"
-			/>
-			{/* Right branch 2 */}
-			<path
-				d="M54 180 C72 162 88 148 100 128"
-				stroke="var(--brand-sage)"
-				strokeWidth="1"
-				strokeLinecap="round"
-			/>
-			<ellipse
-				cx="102"
-				cy="120"
-				rx="11"
-				ry="20"
-				transform="rotate(-35 102 120)"
-				stroke="var(--brand-sage)"
-				strokeWidth="0.8"
-				fill="var(--brand-sage)"
-				fillOpacity="0.07"
-			/>
-			{/* Seed pod top */}
-			<circle
-				cx="71"
-				cy="8"
-				r="8"
-				stroke="var(--brand-dusty-rose)"
-				strokeWidth="0.8"
-				fill="var(--brand-dusty-rose)"
-				fillOpacity="0.12"
-			/>
-			<path
-				d="M68 0 C66 -6 70 -12 71 -8 C72 -12 76 -6 74 0"
-				stroke="var(--brand-dusty-rose)"
-				strokeWidth="0.7"
-				strokeLinecap="round"
-			/>
-		</svg>
-	);
-}
+		<div className="relative">
+			<div
+				className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[var(--brand-shadow-ambient)] rotate-3 relative"
+				style={{
+					background: `
+						radial-gradient(ellipse 90% 70% at 30% 20%, var(--organic-blob-2) 0%, transparent 60%),
+						radial-gradient(ellipse 80% 60% at 70% 80%, var(--organic-blob) 0%, transparent 65%),
+						var(--brand-surface-low)
+					`,
+				}}
+			>
+				{/* Soft light rays through leaves — decorative, evokes sunlight/plants */}
+				<svg
+					viewBox="0 0 300 375"
+					fill="none"
+					role="presentation"
+					aria-hidden
+					className="absolute inset-0 w-full h-full opacity-40"
+				>
+					<path
+						d="M150 -20 L40 200 M150 -20 L110 220 M150 -20 L190 220 M150 -20 L260 200"
+						stroke="var(--brand-blush)"
+						strokeWidth="1"
+					/>
+					<path
+						d="M20 300 C60 260 90 280 120 250 C150 220 170 260 210 235 C250 210 260 250 300 220"
+						stroke="var(--brand-rose)"
+						strokeWidth="1.2"
+						strokeLinecap="round"
+						opacity="0.5"
+					/>
+					<ellipse
+						cx="90"
+						cy="270"
+						rx="16"
+						ry="30"
+						transform="rotate(-15 90 270)"
+						fill="var(--brand-rose)"
+						fillOpacity="0.08"
+						stroke="var(--brand-rose)"
+						strokeWidth="0.8"
+					/>
+					<ellipse
+						cx="220"
+						cy="255"
+						rx="14"
+						ry="26"
+						transform="rotate(20 220 255)"
+						fill="var(--brand-gold)"
+						fillOpacity="0.1"
+						stroke="var(--brand-gold)"
+						strokeWidth="0.8"
+					/>
+				</svg>
+			</div>
 
-function BotanicalRight() {
-	return (
-		<svg
-			viewBox="0 0 220 480"
-			fill="none"
-			role="presentation"
-			aria-hidden
-			className="absolute top-0 right-0 w-44 sm:w-60 opacity-20 pointer-events-none select-none"
-		>
-			{/* Main stem */}
-			<path
-				d="M180 0 C175 80 185 120 170 180 C160 230 178 280 163 340 C150 390 162 440 148 480"
-				stroke="var(--brand-dusty-rose)"
-				strokeWidth="1.2"
-				strokeLinecap="round"
-			/>
-			{/* Left branch */}
-			<path
-				d="M172 170 C150 155 130 145 118 128"
-				stroke="var(--brand-dusty-rose)"
-				strokeWidth="1"
-				strokeLinecap="round"
-			/>
-			<ellipse
-				cx="112"
-				cy="122"
-				rx="12"
-				ry="22"
-				transform="rotate(20 112 122)"
-				stroke="var(--brand-dusty-rose)"
-				strokeWidth="0.8"
-				fill="var(--brand-dusty-rose)"
-				fillOpacity="0.07"
-			/>
-			{/* Right branch */}
-			<path
-				d="M168 220 C190 205 205 190 214 170"
-				stroke="var(--brand-dusty-rose)"
-				strokeWidth="1"
-				strokeLinecap="round"
-			/>
-			<ellipse
-				cx="216"
-				cy="163"
-				rx="10"
-				ry="19"
-				transform="rotate(-20 216 163)"
-				stroke="var(--brand-dusty-rose)"
-				strokeWidth="0.8"
-				fill="var(--brand-dusty-rose)"
-				fillOpacity="0.07"
-			/>
-			{/* Lower left branch */}
-			<path
-				d="M162 320 C140 308 122 298 108 282"
-				stroke="var(--brand-dusty-rose)"
-				strokeWidth="1"
-				strokeLinecap="round"
-			/>
-			<ellipse
-				cx="102"
-				cy="276"
-				rx="11"
-				ry="21"
-				transform="rotate(15 102 276)"
-				stroke="var(--brand-dusty-rose)"
-				strokeWidth="0.8"
-				fill="var(--brand-dusty-rose)"
-				fillOpacity="0.06"
-			/>
-		</svg>
+			{/* Floating "ACT" methodology badge */}
+			<div
+				className="absolute -bottom-8 -left-8 aspect-square w-36 sm:w-48 rounded-full p-1 shadow-[var(--brand-shadow-ambient)] -rotate-6"
+				style={{ background: "var(--brand-aura-gradient)" }}
+			>
+				<div className="bg-background w-full h-full rounded-full flex flex-col items-center justify-center text-center p-4">
+					<span className="font-serif text-2xl sm:text-3xl font-bold italic text-primary">
+						ACT
+					</span>
+					<span className="text-[10px] uppercase tracking-widest text-muted-foreground">
+						Metodología
+					</span>
+				</div>
+			</div>
+		</div>
 	);
 }
 
@@ -189,15 +94,15 @@ export function Hero() {
 			className="relative min-h-screen flex flex-col justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-24 pb-20"
 			aria-label="Introducción"
 		>
-			{/* CSS gradient mesh background — "Luz de tarde" */}
+			{/* CSS gradient mesh background — "Luz de Atardecer" */}
 			<div
 				className="absolute inset-0 -z-20"
 				style={{
 					background: `
-						radial-gradient(ellipse 80% 60% at 15% 70%, #C9A09A33 0%, transparent 60%),
-						radial-gradient(ellipse 70% 50% at 85% 20%, #7B9E8726 0%, transparent 55%),
-						radial-gradient(ellipse 60% 70% at 60% 90%, #EDE8E0 0%, transparent 70%),
-						#F7F3EE
+						radial-gradient(ellipse 80% 60% at 15% 70%, var(--organic-blob) 0%, transparent 60%),
+						radial-gradient(ellipse 70% 50% at 85% 20%, var(--organic-blob-2) 0%, transparent 55%),
+						radial-gradient(ellipse 60% 70% at 60% 90%, var(--brand-surface-low) 0%, transparent 70%),
+						var(--brand-cream)
 					`,
 				}}
 				aria-hidden
@@ -212,53 +117,77 @@ export function Hero() {
 				aria-hidden
 			/>
 
-			{/* Botanical decorations */}
-			<BotanicalLeft />
-			<BotanicalRight />
-
-			<div className="max-w-3xl mx-auto text-center relative">
-				<ScrollReveal delay={0.1}>
-					<p
-						className="text-sm sm:text-base uppercase tracking-[0.2em] mb-6"
-						style={{ color: "var(--brand-sage)" }}
-					>
-						Dra. Claudia Gomez · Psicóloga · Terapeuta ACT
-					</p>
-				</ScrollReveal>
-
-				<ScrollReveal delay={0.2}>
-					<h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-light text-foreground leading-[1.08] tracking-tight mb-8">
-						¿Cansada de{" "}
-						<em
-							className="not-italic font-normal"
-							style={{ color: "var(--brand-terracotta)" }}
+			<div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-12 md:gap-16 items-center relative w-full">
+				<div className="md:col-span-7">
+					<ScrollReveal delay={0.1}>
+						<span
+							className="inline-block text-sm font-medium tracking-[0.2em] uppercase mb-4"
+							style={{ color: "var(--brand-gold)" }}
 						>
-							luchar
-						</em>{" "}
-						contra ti misma?
-					</h1>
-				</ScrollReveal>
+							Terapia con alma
+						</span>
+					</ScrollReveal>
 
-				<ScrollReveal delay={0.35}>
-					<p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed font-light">
-						El ACT es una forma distinta de relacionarte con tus pensamientos y
-						emociones — no para silenciarlos, sino para que dejen de
-						controlarte.
-					</p>
-				</ScrollReveal>
+					<ScrollReveal delay={0.2}>
+						<h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-light text-foreground leading-[1.1] mb-8 -tracking-[0.02em]">
+							Un camino hacia la{" "}
+							<em className="not-italic italic font-normal text-primary">
+								paz
+							</em>{" "}
+							contigo misma
+						</h1>
+					</ScrollReveal>
 
-				<ScrollReveal delay={0.5}>
-					<motion.a
-						href="#contacto"
-						className="inline-block px-10 py-4 rounded-2xl text-base font-medium text-white transition-colors duration-500"
-						style={{ background: "var(--brand-terracotta)" }}
-						whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }}
-						whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
-						transition={{ duration: 0.4, ease: "easeInOut" }}
-					>
-						Hablemos
-					</motion.a>
-				</ScrollReveal>
+					<ScrollReveal delay={0.35}>
+						<p className="text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed mb-10 font-light">
+							Acompañamiento psicológico desde la Terapia de Aceptación y
+							Compromiso (ACT) y la perspectiva de género. Un refugio para sanar
+							tu relación con la comida, tu cuerpo y tu propia historia.
+						</p>
+					</ScrollReveal>
+
+					<ScrollReveal delay={0.5}>
+						<div className="flex flex-wrap items-center gap-4 sm:gap-6">
+							<motion.a
+								href="#contacto"
+								className="inline-block px-8 py-4 rounded-lg text-base font-medium text-primary-foreground shadow-[var(--brand-shadow-ambient)] transition-opacity duration-500 hover:opacity-90"
+								style={{ background: "var(--brand-aura-gradient)" }}
+								whileHover={shouldReduceMotion ? undefined : { y: -2 }}
+								whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+								transition={{ duration: 0.4, ease: "easeInOut" }}
+							>
+								Comienza tu proceso
+							</motion.a>
+							<a
+								href="#enfoque"
+								className="inline-flex items-center gap-2 px-4 py-4 rounded-lg font-semibold text-primary transition-colors duration-500 hover:bg-muted"
+							>
+								Conocer mi enfoque
+								<svg
+									viewBox="0 0 20 20"
+									fill="none"
+									role="presentation"
+									aria-hidden
+									className="w-4 h-4"
+								>
+									<path
+										d="M4 10h12M11 5l5 5-5 5"
+										stroke="currentColor"
+										strokeWidth="1.5"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									/>
+								</svg>
+							</a>
+						</div>
+					</ScrollReveal>
+				</div>
+
+				<div className="md:col-span-5">
+					<ScrollReveal delay={0.25} direction="left">
+						<HeroImagePlaceholder />
+					</ScrollReveal>
+				</div>
 			</div>
 
 			{/* Subtle scroll indicator */}

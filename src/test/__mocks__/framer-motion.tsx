@@ -2,15 +2,44 @@ import { createElement, type ReactNode } from "react";
 
 type MotionProps = {
 	children?: ReactNode;
-	className?: string;
-	id?: string;
 	[key: string]: unknown;
 };
 
+// Framer Motion-only props that aren't valid DOM attributes — stripped so the
+// rest (href, style, id, className, aria-*, role, data-*, ...) can pass
+// through untouched to the underlying tag.
+const ANIMATION_PROPS = new Set([
+	"initial",
+	"animate",
+	"exit",
+	"whileHover",
+	"whileTap",
+	"whileFocus",
+	"whileDrag",
+	"whileInView",
+	"transition",
+	"variants",
+	"viewport",
+	"layout",
+	"layoutId",
+	"custom",
+	"drag",
+	"dragConstraints",
+	"onAnimationStart",
+	"onAnimationComplete",
+]);
+
 const createMotionComponent =
 	(tag: string) =>
-	({ children, className, id }: MotionProps) =>
-		createElement(tag, { className, id }, children);
+	({ children, ...props }: MotionProps) => {
+		const domProps: Record<string, unknown> = {};
+		for (const key of Object.keys(props)) {
+			if (!ANIMATION_PROPS.has(key)) {
+				domProps[key] = props[key];
+			}
+		}
+		return createElement(tag, domProps, children);
+	};
 
 export const motion = {
 	div: createMotionComponent("div"),
@@ -21,6 +50,7 @@ export const motion = {
 	p: createMotionComponent("p"),
 	ul: createMotionComponent("ul"),
 	li: createMotionComponent("li"),
+	a: createMotionComponent("a"),
 };
 
 export const AnimatePresence = ({ children }: { children?: ReactNode }) => (
