@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 import { HowItWorks } from "./how-it-works";
 
@@ -6,29 +7,32 @@ describe("HowItWorks", () => {
 	it("renders the section heading", () => {
 		render(<HowItWorks />);
 		expect(
-			screen.getByRole("heading", { name: "Qué esperar" }),
+			screen.getByRole("heading", { name: "Nuestro proceso" }),
 		).toBeInTheDocument();
 	});
 
-	it("renders all 4 step numbers", () => {
+	it("renders exactly 3 steps — not 4", () => {
 		render(<HowItWorks />);
 		expect(screen.getByText("01")).toBeInTheDocument();
 		expect(screen.getByText("02")).toBeInTheDocument();
 		expect(screen.getByText("03")).toBeInTheDocument();
-		expect(screen.getByText("04")).toBeInTheDocument();
+		expect(screen.queryByText("04")).not.toBeInTheDocument();
 	});
 
-	it("renders all 4 step titles", () => {
+	it("renders all 3 step titles", () => {
 		render(<HowItWorks />);
-		expect(screen.getByText("Primer contacto")).toBeInTheDocument();
-		expect(screen.getByText("Consulta gratuita")).toBeInTheDocument();
-		expect(screen.getByText("Comenzamos")).toBeInTheDocument();
-		expect(screen.getByText("Seguimiento")).toBeInTheDocument();
+		expect(screen.getByText("Sesión de valoración")).toBeInTheDocument();
+		expect(screen.getByText("Evaluación y Mapa")).toBeInTheDocument();
+		expect(screen.getByText("Sesiones de camino")).toBeInTheDocument();
 	});
 
-	it("renders exactly 4 steps", () => {
+	it("has the correct section id", () => {
 		render(<HowItWorks />);
-		const steps = ["01", "02", "03", "04"].map((n) => screen.getByText(n));
-		expect(steps).toHaveLength(4);
+		expect(document.getElementById("que-esperar")).not.toBeNull();
+	});
+
+	it("has no axe violations", async () => {
+		const { container } = render(<HowItWorks />);
+		expect(await axe(container)).toHaveNoViolations();
 	});
 });

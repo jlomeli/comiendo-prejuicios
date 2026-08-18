@@ -66,7 +66,7 @@
   --brand-cream:          #FBF9F5;   /* surface — our "Paper" base, page background */
   --brand-blush:          #D8A2A1;   /* primary_container — soft backgrounds, Aura gradient end */
   --brand-ink:            #504444;   /* on_surface_variant — body text; never pure black */
-  --brand-ink-light:      #7B7170;   /* muted text, placeholders — 4.5:1 on cream */
+  --brand-ink-light:      #726867;   /* muted text, placeholders — 4.65:1 on the darkest light surface (--brand-surface); safely higher on cream/surface-low */
   --brand-ink-light-on-dark: #BFBAB7; /* muted text on an --brand-ink surface (e.g. the footer) — 4.85:1 on ink. --brand-ink-light is calibrated for cream backgrounds and falls to ~2:1 here, so it needs its own token rather than reuse. */
   --brand-surface-low:    #F5F3EF;   /* surface-container-low — nested sections, cards */
   --brand-surface:        #EFEEEA;   /* surface-container — inner modules */
