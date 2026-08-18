@@ -105,7 +105,8 @@ export function Contact() {
 		setErrors(newErrors);
 		if (Object.keys(newErrors).length > 0) return;
 		setStatus("submitting");
-		// Static form — simulate success after brief delay
+		// Static form — simulate success after brief delay. No backend exists
+		// yet to actually deliver this. Tracked in #20.
 		setTimeout(() => setStatus("success"), 600);
 	};
 

@@ -10,7 +10,11 @@ function Newsletter() {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// Static form — no backend wired up yet
+		// Static form — no backend exists yet (the whole site is output:
+		// "static" with no API routes). This shows success without actually
+		// capturing the address, same as contact.tsx's form below. Tracked
+		// in #20 — don't wire a one-off integration here without that
+		// decision being made project-wide.
 		setStatus("success");
 	};
 
