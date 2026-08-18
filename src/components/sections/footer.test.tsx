@@ -1,4 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 import { Footer } from "./footer";
 
@@ -47,5 +49,33 @@ describe("Footer", () => {
 	it("does not render a photo credits section", () => {
 		render(<Footer />);
 		expect(screen.queryByText("Créditos fotográficos")).not.toBeInTheDocument();
+	});
+});
+
+describe("Newsletter", () => {
+	it("renders the newsletter heading and signup form", () => {
+		render(<Footer />);
+		expect(
+			screen.getByRole("heading", {
+				name: "¿Deseas recibir calma en tu correo?",
+			}),
+		).toBeInTheDocument();
+		expect(screen.getByLabelText("Correo electrónico")).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: "Unirme" })).toBeInTheDocument();
+	});
+
+	it("shows a confirmation after submitting a valid email", async () => {
+		render(<Footer />);
+		await userEvent.type(
+			screen.getByLabelText("Correo electrónico"),
+			"lectora@correo.com",
+		);
+		await userEvent.click(screen.getByRole("button", { name: "Unirme" }));
+		expect(await screen.findByText(/nos leemos pronto/)).toBeInTheDocument();
+	});
+
+	it("has no axe violations", async () => {
+		const { container } = render(<Footer />);
+		expect(await axe(container)).toHaveNoViolations();
 	});
 });

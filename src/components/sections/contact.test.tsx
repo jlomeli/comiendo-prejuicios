@@ -8,8 +8,24 @@ describe("Contact", () => {
 	it("renders the section heading", () => {
 		render(<Contact />);
 		expect(
-			screen.getByRole("heading", { name: "Hablemos" }),
+			screen.getByRole("heading", {
+				name: "Da el primer paso hacia tu calma",
+			}),
 		).toBeInTheDocument();
+	});
+
+	it("renders real contact info, not the mockup's Madrid/EUR placeholders", () => {
+		render(<Contact />);
+		expect(
+			screen.getByRole("link", { name: "claudia@comiendoprejuicios.com" }),
+		).toHaveAttribute("href", "mailto:claudia@comiendoprejuicios.com");
+		expect(
+			screen.getByRole("link", { name: "+52 33 1853 0646" }),
+		).toHaveAttribute("href", "tel:+523318530646");
+		expect(
+			screen.getByText("Ciudad de México · Sesiones en línea"),
+		).toBeInTheDocument();
+		expect(screen.queryByText(/Madrid/)).not.toBeInTheDocument();
 	});
 
 	it("renders the name field", () => {

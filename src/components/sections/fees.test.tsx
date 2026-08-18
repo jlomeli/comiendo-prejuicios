@@ -11,19 +11,28 @@ describe("Fees", () => {
 		).toBeInTheDocument();
 	});
 
-	it("renders the fee range", () => {
+	it("renders the real MXN fee range, not the mockup's EUR pricing", () => {
 		render(<Fees />);
-		expect(screen.getByText("$800–$1,200 MXN")).toBeInTheDocument();
+		expect(screen.getByText("$800–$1,200")).toBeInTheDocument();
+		expect(screen.getByText("MXN / sesión")).toBeInTheDocument();
+		expect(screen.queryByText(/€/)).not.toBeInTheDocument();
 	});
 
-	it("renders the sliding scale mention", () => {
+	it("renders the 4-session bundle", () => {
 		render(<Fees />);
-		expect(screen.getByText("Escala móvil")).toBeInTheDocument();
+		expect(screen.getByText("Bono 4 Sesiones")).toBeInTheDocument();
+		expect(screen.getByText("por el precio de 3.5")).toBeInTheDocument();
 	});
 
-	it("renders the teletherapy note", () => {
+	it("does not render the discontinued sliding scale or superbill", () => {
 		render(<Fees />);
-		expect(screen.getByText("En línea")).toBeInTheDocument();
+		expect(screen.queryByText("Escala móvil")).not.toBeInTheDocument();
+		expect(screen.queryByText(/superbill/i)).not.toBeInTheDocument();
+	});
+
+	it("renders the online-only modality", () => {
+		render(<Fees />);
+		expect(screen.getAllByText("En línea").length).toBeGreaterThan(0);
 	});
 
 	it("has the correct section id", () => {
