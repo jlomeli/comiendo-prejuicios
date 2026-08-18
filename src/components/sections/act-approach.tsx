@@ -4,112 +4,61 @@ const ACT_PILLARS = [
 	{
 		id: "aceptacion",
 		label: "Aceptación",
-		text: "No es resignarse. Es dejar de gastar energía en resistir lo que ya está aquí.",
+		text: "Dejar de pelear con lo que ya está ahí para ahorrar energía vital.",
 	},
 	{
-		id: "defusion",
-		label: "Defusión",
-		text: "Los pensamientos son solo palabras — no órdenes. Aprendes a observarlos sin obedecerlos.",
-	},
-	{
-		id: "presente",
-		label: "Momento presente",
-		text: "Volver al aquí y ahora, donde la vida realmente ocurre.",
-	},
-	{
-		id: "contexto",
-		label: "Yo como contexto",
-		text: "Hay una parte de ti que observa todo y nunca ha sido dañada. Desde ahí trabajamos.",
+		id: "mindfulness",
+		label: "Mindfulness",
+		text: "Habitar el presente sin juicios, incluso cuando es incómodo.",
 	},
 	{
 		id: "valores",
 		label: "Valores",
-		text: "No reglas ni obligaciones. Qué importa de verdad para ti y cómo quieres vivir.",
-	},
-	{
-		id: "accion",
-		label: "Acción comprometida",
-		text: "Pequeños pasos en la dirección que elegiste, aunque el miedo o la tristeza también estén.",
+		text: "Descubrir qué te importa de verdad y actuar en esa dirección.",
 	},
 ] as const;
 
-/* Soft organic SVG — 6 petals arranged in a loose circle, not a clinical chart */
-function HexaflexBloom() {
+/* Decorative sparkle — a simple hand-drawn accent, not a clinical icon */
+function Sparkle() {
 	return (
 		<svg
-			viewBox="0 0 200 200"
+			viewBox="0 0 40 40"
 			fill="none"
 			role="presentation"
 			aria-hidden
-			className="w-48 h-48 sm:w-56 sm:h-56 opacity-70"
+			className="w-10 h-10 mx-auto mb-8"
 		>
-			{/* Center circle */}
-			<circle
-				cx="100"
-				cy="100"
-				r="18"
-				fill="var(--brand-linen)"
-				stroke="var(--brand-mist)"
-				strokeWidth="1"
+			<path
+				d="M20 4 L23 17 L36 20 L23 23 L20 36 L17 23 L4 20 L17 17 Z"
+				stroke="currentColor"
+				strokeWidth="1.2"
+				strokeLinejoin="round"
 			/>
-			<text
-				x="100"
-				y="105"
-				textAnchor="middle"
-				fontSize="8"
-				fill="var(--brand-stone-light)"
-				fontFamily="Cormorant Garamond, serif"
-				fontStyle="italic"
-			>
-				ACT
-			</text>
+		</svg>
+	);
+}
 
-			{/* 6 petals */}
-			{[0, 60, 120, 180, 240, 300].map((angle, i) => {
-				const rad = (angle - 90) * (Math.PI / 180);
-				const cx = 100 + 56 * Math.cos(rad);
-				const cy = 100 + 56 * Math.sin(rad);
-				const colors = [
-					"var(--brand-sage)",
-					"var(--brand-dusty-rose)",
-					"var(--brand-terracotta)",
-					"var(--brand-sage)",
-					"var(--brand-dusty-rose)",
-					"var(--brand-terracotta)",
-				];
-				return (
-					<ellipse
-						key={angle}
-						cx={cx}
-						cy={cy}
-						rx="22"
-						ry="14"
-						fill={colors[i]}
-						fillOpacity="0.18"
-						stroke={colors[i]}
-						strokeWidth="1"
-						transform={`rotate(${angle}, ${cx}, ${cy})`}
-					/>
-				);
-			})}
-
-			{/* Connecting lines */}
-			{[0, 60, 120, 180, 240, 300].map((angle) => {
-				const rad = (angle - 90) * (Math.PI / 180);
-				const x2 = 100 + 40 * Math.cos(rad);
-				const y2 = 100 + 40 * Math.sin(rad);
-				return (
-					<line
-						key={angle}
-						x1="100"
-						y1="100"
-						x2={x2}
-						y2={y2}
-						stroke="var(--brand-mist)"
-						strokeWidth="1"
-					/>
-				);
-			})}
+/* Faint wandering line — echoes the site's botanical motifs at low opacity */
+function BackgroundWave() {
+	return (
+		<svg
+			viewBox="0 0 100 100"
+			preserveAspectRatio="none"
+			fill="none"
+			role="presentation"
+			aria-hidden
+			className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none"
+		>
+			<path
+				d="M0,50 Q25,25 50,50 T100,50"
+				stroke="currentColor"
+				strokeWidth="0.5"
+			/>
+			<path
+				d="M0,70 Q25,45 50,70 T100,70"
+				stroke="currentColor"
+				strokeWidth="0.5"
+			/>
 		</svg>
 	);
 }
@@ -118,84 +67,65 @@ export function ActApproach() {
 	return (
 		<section
 			id="enfoque"
-			className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8"
-			style={{ background: "var(--brand-cream)" }}
+			className="relative overflow-hidden py-24 sm:py-32 px-4 sm:px-6 lg:px-8"
+			style={{ background: "var(--brand-rose)", color: "#FFFFFF" }}
 			aria-labelledby="act-heading"
 		>
-			<div className="max-w-5xl mx-auto">
-				{/* Header */}
-				<ScrollReveal className="text-center mb-16">
-					<p
-						className="text-sm uppercase tracking-[0.2em] mb-4"
-						style={{ color: "var(--brand-sage)" }}
-					>
-						El enfoque terapéutico
-					</p>
+			<BackgroundWave />
+
+			<div className="max-w-3xl mx-auto text-center relative">
+				<ScrollReveal>
+					<Sparkle />
 					<h2
 						id="act-heading"
-						className="font-serif text-4xl sm:text-5xl font-light text-foreground mb-6"
+						className="font-serif text-4xl sm:text-5xl md:text-6xl font-light leading-tight mb-8"
 					>
-						El Enfoque ACT
+						No se trata de arreglarte.
+						<br />
+						<em
+							className="not-italic italic font-normal"
+							// A lightened blush, not the raw token — plain --brand-blush only
+							// clears 2.94:1 on this rose background, just under the 3:1 floor
+							// large text needs.
+							style={{ color: "#E4BEBD" }}
+						>
+							Se trata de tu libertad.
+						</em>
 					</h2>
-					<p className="text-muted-foreground text-lg max-w-2xl mx-auto font-light leading-relaxed">
-						La Terapia de Aceptación y Compromiso (ACT) no te pide que pienses
-						diferente ni que te sientas mejor. Te invita a relacionarte de otra
-						forma con lo que ya sientes — para que tus pensamientos y emociones
-						dejen de dictar cada decisión.
+					<p
+						className="text-lg sm:text-xl font-light leading-relaxed"
+						style={{ color: "rgba(255,255,255,0.93)" }}
+					>
+						En ACT no buscamos eliminar el malestar por arte de magia, sino
+						cambiar tu relación con él. Para que el miedo, la duda o la tristeza
+						ya no sean quienes lleven el volante de tu vida.
 					</p>
 				</ScrollReveal>
+			</div>
 
-				{/* Bloom + pillars */}
-				<div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-					<ScrollReveal direction="right" className="flex justify-center">
-						<HexaflexBloom />
-					</ScrollReveal>
-
-					<ScrollReveal delay={0.1} direction="left">
-						<div className="space-y-5">
-							{ACT_PILLARS.map((pillar) => (
-								<div key={pillar.id} className="flex gap-3">
-									<div
-										className="mt-1 w-2 h-2 rounded-full flex-shrink-0"
-										style={{ background: "var(--brand-dusty-rose)" }}
-										aria-hidden
-									/>
-									<div>
-										<span
-											className="font-serif text-base font-normal"
-											style={{ color: "var(--brand-stone)" }}
-										>
-											{pillar.label} —{" "}
-										</span>
-										<span
-											className="text-sm font-light leading-relaxed"
-											style={{ color: "var(--brand-stone-light)" }}
-										>
-											{pillar.text}
-										</span>
-									</div>
-								</div>
-							))}
+			<div className="max-w-5xl mx-auto grid sm:grid-cols-3 gap-6 mt-16 relative text-left">
+				{ACT_PILLARS.map((pillar, i) => (
+					<ScrollReveal key={pillar.id} delay={0.1 + i * 0.1}>
+						<div
+							className="h-full p-8 rounded-xl"
+							style={{
+								background: "rgba(255,255,255,0.1)",
+								border: "1px solid rgba(255,255,255,0.2)",
+								backdropFilter: "blur(8px)",
+							}}
+						>
+							<h3 className="font-serif text-xl font-normal mb-3">
+								{pillar.label}
+							</h3>
+							<p
+								className="text-sm leading-relaxed font-light"
+								style={{ color: "rgba(255,255,255,0.93)" }}
+							>
+								{pillar.text}
+							</p>
 						</div>
 					</ScrollReveal>
-				</div>
-
-				{/* Closing quote */}
-				<ScrollReveal delay={0.2} className="text-center">
-					<div
-						className="inline-block px-8 py-6 rounded-3xl"
-						style={{
-							background: "var(--brand-linen)",
-							borderLeft: "3px solid var(--brand-dusty-rose)",
-						}}
-					>
-						<p className="font-serif text-2xl sm:text-3xl font-light italic text-foreground">
-							"No se trata de arreglarte.
-							<br />
-							Se trata de libertad."
-						</p>
-					</div>
-				</ScrollReveal>
+				))}
 			</div>
 		</section>
 	);
