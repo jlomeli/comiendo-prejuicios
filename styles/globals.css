@@ -64,7 +64,7 @@
   --brand-gold:           #735C00;   /* secondary — "Golden Hour" accents: focus glow, pagination dots, bullets */
   --brand-slate:          #50606F;   /* tertiary — the cooling sky; grounding/secondary information */
   --brand-cream:          #FBF9F5;   /* surface — our "Paper" base, page background */
-  --brand-blush:          #D8A2A1;   /* primary_container — soft backgrounds, Aura gradient end */
+  --brand-blush:          #D8A2A1;   /* primary_container — soft backgrounds, decorative accents */
   --brand-ink:            #504444;   /* on_surface_variant — body text; never pure black */
   --brand-ink-light:      #726867;   /* muted text, placeholders — 4.65:1 on the darkest light surface (--brand-surface); safely higher on cream/surface-low */
   --brand-ink-light-on-dark: #BFBAB7; /* muted text on an --brand-ink surface (e.g. the footer) — 4.85:1 on ink. --brand-ink-light is calibrated for cream backgrounds and falls to ~2:1 here, so it needs its own token rather than reuse. */
@@ -75,8 +75,13 @@
   --brand-error:          #BA1A1A;
 
   /* Signature texture: the "Aura" gradient (135deg, primary → primary_container).
-     Hero sections and primary CTAs only — DESIGN.md §2. */
-  --brand-aura-gradient: linear-gradient(135deg, var(--brand-rose), var(--brand-blush));
+     Hero sections and primary CTAs only — DESIGN.md §2. Buttons using this
+     gradient carry white text, so both stops must clear 4.5:1 with white —
+     DESIGN.md's literal --brand-blush end stop (#D8A2A1) only clears 2.19:1.
+     --brand-aura-end is a deeper blush kept just inside the AA floor (5.04:1)
+     instead of the raw token. */
+  --brand-aura-end: #916363;
+  --brand-aura-gradient: linear-gradient(135deg, var(--brand-rose), var(--brand-aura-end));
 
   /* Ambient shadow — tinted with the primary rose, never a flat black drop shadow. */
   --brand-shadow-ambient: 0 12px 32px -4px rgba(127, 83, 83, 0.08);

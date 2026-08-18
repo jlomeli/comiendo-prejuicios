@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
@@ -58,7 +56,7 @@ function FaqItem({
 	return (
 		<div
 			className="border-b last:border-b-0"
-			style={{ borderColor: "var(--brand-mist)" }}
+			style={{ borderColor: "var(--border)" }}
 		>
 			<button
 				id={triggerId}
@@ -68,16 +66,13 @@ function FaqItem({
 				aria-controls={panelId}
 				onClick={() => setOpen((prev) => !prev)}
 			>
-				<span
-					className="font-serif text-lg font-normal"
-					style={{ color: "var(--brand-stone)" }}
-				>
+				<span className="font-serif text-lg font-normal text-foreground">
 					{question}
 				</span>
 				<span
 					className="shrink-0 text-xl leading-none transition-transform duration-500"
 					style={{
-						color: "var(--brand-dusty-rose)",
+						color: "var(--brand-gold)",
 						transform: open ? "rotate(45deg)" : "rotate(0deg)",
 					}}
 					aria-hidden
@@ -93,10 +88,7 @@ function FaqItem({
 				className="overflow-hidden transition-[max-height] duration-500 ease-in-out"
 				style={{ maxHeight: open ? "400px" : "0px" }}
 			>
-				<p
-					className="pb-5 text-sm font-light leading-relaxed"
-					style={{ color: "var(--brand-stone-light)" }}
-				>
+				<p className="pb-5 text-sm font-light leading-relaxed text-muted-foreground">
 					{answer}
 				</p>
 			</section>
@@ -115,7 +107,7 @@ export function Faq() {
 				<ScrollReveal className="text-center mb-14">
 					<p
 						className="text-sm uppercase tracking-[0.2em] mb-4"
-						style={{ color: "var(--brand-sage)" }}
+						style={{ color: "var(--brand-gold)" }}
 					>
 						Resolvemos dudas
 					</p>
@@ -129,11 +121,8 @@ export function Faq() {
 
 				<ScrollReveal delay={0.1}>
 					<div
-						className="rounded-3xl border px-6 sm:px-8"
-						style={{
-							borderColor: "var(--brand-mist)",
-							background: "var(--brand-linen)",
-						}}
+						className="rounded-3xl px-6 sm:px-8 shadow-[var(--brand-shadow-ambient)]"
+						style={{ background: "var(--brand-surface-lowest)" }}
 					>
 						{FAQ_ITEMS.map((item) => (
 							<FaqItem
