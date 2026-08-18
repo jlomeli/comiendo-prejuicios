@@ -68,7 +68,10 @@ function HeroImagePlaceholder() {
 
 			{/* Floating "ACT" methodology badge */}
 			<div
-				className="absolute -bottom-8 -left-8 aspect-square w-36 sm:w-48 rounded-full p-1 shadow-[var(--brand-shadow-ambient)] -rotate-6"
+				// left-0 on mobile: the section's own `overflow-hidden` clips anything
+				// poking past its edge, and mobile has no centering slack to absorb
+				// -left-8. The poke-out flourish only has room from md up.
+				className="absolute -bottom-8 left-0 md:-left-8 aspect-square w-36 sm:w-48 rounded-full p-1 shadow-[var(--brand-shadow-ambient)] -rotate-6"
 				style={{ background: "var(--brand-aura-gradient)" }}
 			>
 				<div className="bg-background w-full h-full rounded-full flex flex-col items-center justify-center text-center p-4">
