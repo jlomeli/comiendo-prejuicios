@@ -2,10 +2,11 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 
 /**
  * Portrait placeholder for Dra. Claudia Gomez — an abstract silhouette +
- * monogram, not a photo. No photo-generation tooling is available in this
- * environment, and faking photorealism for a real, named person would be
- * actively misleading, so this stays deliberately illustrated until real
- * photography exists — tracked in #15.
+ * monogram, not a photo. Faking photorealism for a real, named person
+ * would be actively misleading, so this stays deliberately illustrated
+ * until a real headshot exists — tracked in #21 (split off from #15,
+ * which is otherwise resolved now that the hero and process sections
+ * have real photography).
  */
 function PortraitPlaceholder() {
 	return (

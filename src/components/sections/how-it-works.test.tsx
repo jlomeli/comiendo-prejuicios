@@ -31,6 +31,16 @@ describe("HowItWorks", () => {
 		expect(document.getElementById("que-esperar")).not.toBeNull();
 	});
 
+	it("renders a real photo with alt text for each step", () => {
+		render(<HowItWorks />);
+		const images = screen.getAllByRole("img");
+		expect(images).toHaveLength(3);
+		for (const img of images) {
+			expect(img.getAttribute("alt")).toBeTruthy();
+			expect(img.getAttribute("src")).not.toBe("");
+		}
+	});
+
 	it("has no axe violations", async () => {
 		const { container } = render(<HowItWorks />);
 		expect(await axe(container)).toHaveNoViolations();
