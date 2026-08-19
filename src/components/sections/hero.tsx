@@ -16,6 +16,12 @@ function HeroImage({ image }: { image: OptimizedImage }) {
 					width={image.width}
 					height={image.height}
 					alt="Una planta bañada por luz cálida de atardecer contra un muro texturizado"
+					// Above the fold and the likely LCP element — eager is already
+					// the browser default, but making it explicit documents intent
+					// and pairs with the deliberate loading="lazy" on the below-the-
+					// fold process-step photos in how-it-works.tsx.
+					loading="eager"
+					fetchPriority="high"
 					className="w-full h-full object-cover"
 				/>
 			</div>

@@ -43,6 +43,8 @@ function StepVisual({ photo, alt }: { photo: OptimizedImage; alt: string }) {
 				width={photo.width}
 				height={photo.height}
 				alt={alt}
+				loading="lazy"
+				decoding="async"
 				className="w-full h-full object-cover"
 			/>
 		</div>
