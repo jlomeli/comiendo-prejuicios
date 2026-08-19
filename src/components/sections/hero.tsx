@@ -1,69 +1,23 @@
 import { motion, useReducedMotion } from "framer-motion";
+import heroPhotoRaw from "@/assets/images/hero-plant-sunlight.jpg";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
-/**
- * Hero image placeholder — an illustrated stand-in for the "warm, natural
- * photography (plants/sunlight)" PRD §2 calls for. No photo-generation
- * tooling is available in this environment, so this ships as a tasteful
- * abstract panel (Aura gradient + soft light motif) rather than a faked
- * photo. Swap for real photography — tracked in #15.
- */
-function HeroImagePlaceholder() {
+/** Shape shared with astro:assets' getImage() output — index.astro passes an
+ * optimized (resized, webp) version; this raw import is the fallback used
+ * when the component is rendered without that (e.g. in tests). */
+type OptimizedImage = { src: string; width: number; height: number };
+
+function HeroImage({ image }: { image: OptimizedImage }) {
 	return (
 		<div className="relative">
-			<div
-				className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[var(--brand-shadow-ambient)] rotate-3 relative"
-				style={{
-					background: `
-						radial-gradient(ellipse 90% 70% at 30% 20%, var(--organic-blob-2) 0%, transparent 60%),
-						radial-gradient(ellipse 80% 60% at 70% 80%, var(--organic-blob) 0%, transparent 65%),
-						var(--brand-surface-low)
-					`,
-				}}
-			>
-				{/* Soft light rays through leaves — decorative, evokes sunlight/plants */}
-				<svg
-					viewBox="0 0 300 375"
-					fill="none"
-					role="presentation"
-					aria-hidden
-					className="absolute inset-0 w-full h-full opacity-40"
-				>
-					<path
-						d="M150 -20 L40 200 M150 -20 L110 220 M150 -20 L190 220 M150 -20 L260 200"
-						stroke="var(--brand-blush)"
-						strokeWidth="1"
-					/>
-					<path
-						d="M20 300 C60 260 90 280 120 250 C150 220 170 260 210 235 C250 210 260 250 300 220"
-						stroke="var(--brand-rose)"
-						strokeWidth="1.2"
-						strokeLinecap="round"
-						opacity="0.5"
-					/>
-					<ellipse
-						cx="90"
-						cy="270"
-						rx="16"
-						ry="30"
-						transform="rotate(-15 90 270)"
-						fill="var(--brand-rose)"
-						fillOpacity="0.08"
-						stroke="var(--brand-rose)"
-						strokeWidth="0.8"
-					/>
-					<ellipse
-						cx="220"
-						cy="255"
-						rx="14"
-						ry="26"
-						transform="rotate(20 220 255)"
-						fill="var(--brand-gold)"
-						fillOpacity="0.1"
-						stroke="var(--brand-gold)"
-						strokeWidth="0.8"
-					/>
-				</svg>
+			<div className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[var(--brand-shadow-ambient)] rotate-3">
+				<img
+					src={image.src}
+					width={image.width}
+					height={image.height}
+					alt="Una planta bañada por luz cálida de atardecer contra un muro texturizado"
+					className="w-full h-full object-cover"
+				/>
 			</div>
 
 			{/* Floating "ACT" methodology badge */}
@@ -87,7 +41,11 @@ function HeroImagePlaceholder() {
 	);
 }
 
-export function Hero() {
+export function Hero({
+	heroImage = heroPhotoRaw,
+}: {
+	heroImage?: OptimizedImage;
+}) {
 	// Disable JS-driven animations when user prefers reduced motion (WCAG 2.3.3)
 	const shouldReduceMotion = useReducedMotion();
 
@@ -188,7 +146,7 @@ export function Hero() {
 
 				<div className="md:col-span-5">
 					<ScrollReveal delay={0.25} direction="left">
-						<HeroImagePlaceholder />
+						<HeroImage image={heroImage} />
 					</ScrollReveal>
 				</div>
 			</div>

@@ -1,4 +1,9 @@
 ---
+import { getImage } from "astro:assets";
+import heroPhotoRaw from "@/assets/images/hero-plant-sunlight.jpg";
+import step1PhotoRaw from "@/assets/images/process-step-1-valoracion.jpg";
+import step2PhotoRaw from "@/assets/images/process-step-2-mapa.jpg";
+import step3PhotoRaw from "@/assets/images/process-step-3-camino.jpg";
 import { Header } from "@/components/header";
 import {
 	About,
@@ -13,16 +18,38 @@ import {
 	Testimonials,
 } from "@/components/sections";
 import Layout from "../layouts/Layout.astro";
+
+// Resize + re-encode as webp at build time — these ship at roughly the max
+// width they're ever displayed at (533px hero column, ~512px step column),
+// so there's no reason to serve the full ~1920px source photos.
+// GetImageResult only exposes width/height via `.attributes`; reshape to the
+// flatter { src, width, height } the React components expect.
+function toImageProp(result: Awaited<ReturnType<typeof getImage>>) {
+	return {
+		src: result.src,
+		width: result.attributes.width,
+		height: result.attributes.height,
+	};
+}
+
+const heroImage = toImageProp(
+	await getImage({ src: heroPhotoRaw, width: 1200, format: "webp" }),
+);
+const stepPhotos = await Promise.all(
+	[step1PhotoRaw, step2PhotoRaw, step3PhotoRaw].map(async (src) =>
+		toImageProp(await getImage({ src, width: 1000, format: "webp" })),
+	),
+);
 ---
 
 <Layout>
 	<Header client:load />
 	<main id="main-content" tabindex="-1">
-		<Hero client:load />
+		<Hero client:load heroImage={heroImage} />
 		<Problem client:visible />
 		<About client:visible />
 		<ActApproach client:visible />
-		<HowItWorks client:visible />
+		<HowItWorks client:visible photos={stepPhotos} />
 		<Fees client:visible />
 		<Testimonials client:visible />
 		<Faq client:visible />

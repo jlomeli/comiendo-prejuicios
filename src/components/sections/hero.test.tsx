@@ -31,6 +31,15 @@ describe("Hero", () => {
 		).toBeInTheDocument();
 	});
 
+	it("renders the real hero photo with meaningful alt text", () => {
+		render(<Hero />);
+		const img = screen.getByRole("img", {
+			name: /planta.*luz.*atardecer/i,
+		});
+		expect(img).toBeInTheDocument();
+		expect(img.getAttribute("src")).not.toBe("");
+	});
+
 	it("has no axe violations", async () => {
 		const { container } = render(<Hero />);
 		expect(await axe(container)).toHaveNoViolations();
