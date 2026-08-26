@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,9 @@ const NAV_LINKS = [
 
 export function Header() {
 	const [menuOpen, setMenuOpen] = useState(false);
+	// Disable the animated open/close transition when reduced motion is
+	// preferred (WCAG 2.3.3) — the menu still opens and closes, just instantly.
+	const shouldReduceMotion = useReducedMotion();
 
 	return (
 		<header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/60">
@@ -80,7 +83,10 @@ export function Header() {
 						initial={{ height: 0, opacity: 0 }}
 						animate={{ height: "auto", opacity: 1 }}
 						exit={{ height: 0, opacity: 0 }}
-						transition={{ duration: 0.4, ease: "easeInOut" }}
+						transition={{
+							duration: shouldReduceMotion ? 0 : 0.4,
+							ease: "easeInOut",
+						}}
 					>
 						<ul className="px-4 py-4 space-y-1">
 							{NAV_LINKS.map((link) => (
