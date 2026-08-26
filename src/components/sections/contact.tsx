@@ -69,7 +69,12 @@ type FormErrors = {
 	correo?: string;
 };
 
-type FormStatus = "idle" | "submitting" | "success";
+type FormStatus = "idle" | "submitting" | "success" | "error";
+
+// Formspree form endpoint — see https://formspree.io/forms. Submissions are
+// emailed to Claudia; the free tier caps at 50/mo. Public form IDs are safe
+// to ship client-side (they're not a secret, just an inbox address).
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mjybzkna";
 
 /** Validates required fields using the HTML5 Constraint Validation API. */
 function validateForm(form: HTMLFormElement): FormErrors {
@@ -98,16 +103,24 @@ export function Contact() {
 	// Disable JS-driven animations when user prefers reduced motion (WCAG 2.3.3)
 	const shouldReduceMotion = useReducedMotion();
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const form = e.currentTarget;
 		const newErrors = validateForm(form);
 		setErrors(newErrors);
 		if (Object.keys(newErrors).length > 0) return;
 		setStatus("submitting");
-		// Static form — simulate success after brief delay. No backend exists
-		// yet to actually deliver this. Tracked in #20.
-		setTimeout(() => setStatus("success"), 600);
+		try {
+			const response = await fetch(FORMSPREE_ENDPOINT, {
+				method: "POST",
+				headers: { Accept: "application/json" },
+				body: new FormData(form),
+			});
+			setStatus(response.ok ? "success" : "error");
+		} catch {
+			// Network failure (offline, blocked request, etc).
+			setStatus("error");
+		}
 	};
 
 	return (
@@ -220,6 +233,8 @@ export function Contact() {
 							<div aria-live="polite" aria-atomic="true" className="sr-only">
 								{status === "success" &&
 									"Tu mensaje fue enviado. Te responderé pronto."}
+								{status === "error" &&
+									"No se pudo enviar tu mensaje. Por favor, intenta de nuevo."}
 							</div>
 
 							<form className="space-y-6" noValidate onSubmit={handleSubmit}>
@@ -327,6 +342,23 @@ export function Contact() {
 											? "¡Mensaje enviado!"
 											: "Enviar mensaje"}
 								</motion.button>
+
+								{status === "error" && (
+									<p
+										role="alert"
+										className="text-sm text-center text-destructive"
+									>
+										No se pudo enviar tu mensaje. Intenta de nuevo o escríbeme
+										directamente a{" "}
+										<a
+											href="mailto:claudia@comiendoprejuicios.com"
+											className="underline underline-offset-4"
+										>
+											claudia@comiendoprejuicios.com
+										</a>
+										.
+									</p>
+								)}
 
 								{/* Crisis note */}
 								<p className="text-xs font-light text-center leading-relaxed pt-2 text-muted-foreground">

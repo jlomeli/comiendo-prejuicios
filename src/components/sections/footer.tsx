@@ -3,20 +3,21 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-type NewsletterStatus = "idle" | "success";
+type NewsletterStatus = "idle" | "submitted";
+
+// Buttondown's embed-subscribe endpoint. Buttondown's own docs ask
+// integrators NOT to submit this via fetch(): a subscriber sometimes needs
+// to see Buttondown's response page to complete a CAPTCHA challenge or fix a
+// typo'd address. So this is left as a real HTML form submission (not
+// intercepted with preventDefault) — target="_blank" keeps this site's own
+// tab in place while Buttondown's confirmation/error page opens in a new
+// one. Because that outcome plays out in the new tab, we can only
+// acknowledge the request was sent, not that the subscription succeeded.
+const BUTTONDOWN_ENDPOINT =
+	"https://buttondown.com/api/emails/embed-subscribe/comiendoprejuicios";
 
 function Newsletter() {
 	const [status, setStatus] = useState<NewsletterStatus>("idle");
-
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		// Static form — no backend exists yet (the whole site is output:
-		// "static" with no API routes). This shows success without actually
-		// capturing the address, same as contact.tsx's form below. Tracked
-		// in #20 — don't wire a one-off integration here without that
-		// decision being made project-wide.
-		setStatus("success");
-	};
 
 	return (
 		<section
@@ -38,31 +39,38 @@ function Newsletter() {
 				</p>
 
 				<div aria-live="polite" aria-atomic="true" className="sr-only">
-					{status === "success" && "Gracias por suscribirte."}
+					{status === "submitted" &&
+						"Se abrió una pestaña nueva de Buttondown para confirmar tu suscripción."}
 				</div>
 
-				{status === "success" ? (
-					<p className="font-medium text-primary">
-						Gracias por suscribirte — nos leemos pronto.
+				<form
+					className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+					action={BUTTONDOWN_ENDPOINT}
+					method="post"
+					target="_blank"
+					onSubmit={() => setStatus("submitted")}
+					rel="noopener"
+				>
+					<input type="hidden" name="embed" value="1" />
+					<label htmlFor="newsletter-email" className="sr-only">
+						Correo electrónico
+					</label>
+					<Input
+						id="newsletter-email"
+						name="email"
+						type="email"
+						required
+						placeholder="tu@correo.com"
+						className="flex-1"
+					/>
+					<Button type="submit">Unirme</Button>
+				</form>
+
+				{status === "submitted" && (
+					<p className="text-sm text-primary mt-4">
+						Se abrió una pestaña nueva para confirmar tu suscripción — si no la
+						ves, revisa si tu navegador bloqueó la ventana emergente.
 					</p>
-				) : (
-					<form
-						className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
-						onSubmit={handleSubmit}
-					>
-						<label htmlFor="newsletter-email" className="sr-only">
-							Correo electrónico
-						</label>
-						<Input
-							id="newsletter-email"
-							name="correo"
-							type="email"
-							required
-							placeholder="tu@correo.com"
-							className="flex-1"
-						/>
-						<Button type="submit">Unirme</Button>
-					</form>
 				)}
 
 				<p className="text-sm italic text-muted-foreground mt-6">

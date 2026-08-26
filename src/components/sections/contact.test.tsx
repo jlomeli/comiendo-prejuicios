@@ -1,8 +1,18 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { Contact } from "./contact";
+
+/** Fills in the two required fields and submits, leaving the rest default. */
+async function fillAndSubmit(user: ReturnType<typeof userEvent.setup>) {
+	await user.type(screen.getByLabelText("Nombre"), "Lectora");
+	await user.type(
+		screen.getByLabelText("Correo electrónico"),
+		"lectora@correo.com",
+	);
+	await user.click(screen.getByRole("button", { name: "Enviar mensaje" }));
+}
 
 describe("Contact", () => {
 	it("renders the section heading", () => {
@@ -93,5 +103,73 @@ describe("Contact", () => {
 	it("has no axe violations", async () => {
 		const { container } = render(<Contact />);
 		expect(await axe(container)).toHaveNoViolations();
+	});
+
+	describe("submission", () => {
+		afterEach(() => {
+			vi.unstubAllGlobals();
+		});
+
+		it("posts to Formspree and shows a success message", async () => {
+			const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+			vi.stubGlobal("fetch", fetchMock);
+			const user = userEvent.setup();
+
+			render(<Contact />);
+			await fillAndSubmit(user);
+
+			expect(
+				await screen.findByRole("button", { name: "¡Mensaje enviado!" }),
+			).toBeInTheDocument();
+			expect(fetchMock).toHaveBeenCalledWith(
+				"https://formspree.io/f/mjybzkna",
+				expect.objectContaining({
+					method: "POST",
+					headers: { Accept: "application/json" },
+				}),
+			);
+			const sentBody = fetchMock.mock.calls[0][1].body as FormData;
+			expect(sentBody.get("nombre")).toBe("Lectora");
+			expect(sentBody.get("correo")).toBe("lectora@correo.com");
+		});
+
+		it("shows an error message and a fallback email when the request fails", async () => {
+			vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false }));
+			const user = userEvent.setup();
+
+			render(<Contact />);
+			await fillAndSubmit(user);
+
+			const alert = await screen.findByText(/No se pudo enviar tu mensaje/, {
+				selector: "p[role='alert']",
+			});
+			expect(alert).toBeInTheDocument();
+			expect(
+				within(alert).getByRole("link", {
+					name: "claudia@comiendoprejuicios.com",
+				}),
+			).toHaveAttribute("href", "mailto:claudia@comiendoprejuicios.com");
+			// Button re-enables so the visitor can retry.
+			expect(
+				screen.getByRole("button", { name: "Enviar mensaje" }),
+			).not.toBeDisabled();
+		});
+
+		it("shows an error message on a network failure", async () => {
+			vi.stubGlobal(
+				"fetch",
+				vi.fn().mockRejectedValue(new Error("network down")),
+			);
+			const user = userEvent.setup();
+
+			render(<Contact />);
+			await fillAndSubmit(user);
+
+			expect(
+				await screen.findByText(/No se pudo enviar tu mensaje/, {
+					selector: "p[role='alert']",
+				}),
+			).toBeInTheDocument();
+		});
 	});
 });
