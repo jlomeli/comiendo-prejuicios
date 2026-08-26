@@ -104,6 +104,15 @@ describe("Newsletter", () => {
 		).toBeInTheDocument();
 	});
 
+	it("disables the submit button after submitting to guard against repeat requests", async () => {
+		render(<Footer />);
+		const form = screen.getByLabelText("Correo electrónico").closest("form");
+		if (!form) throw new Error("form not found");
+		fireEvent.submit(form);
+		await screen.findByText(/pestaña nueva/, { selector: "p" });
+		expect(screen.getByRole("button", { name: "Unirme" })).toBeDisabled();
+	});
+
 	it("has no axe violations", async () => {
 		const { container } = render(<Footer />);
 		expect(await axe(container)).toHaveNoViolations();

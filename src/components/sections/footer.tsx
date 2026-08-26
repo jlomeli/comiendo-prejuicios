@@ -63,7 +63,9 @@ function Newsletter() {
 						placeholder="tu@correo.com"
 						className="flex-1"
 					/>
-					<Button type="submit">Unirme</Button>
+					<Button type="submit" disabled={status === "submitted"}>
+						Unirme
+					</Button>
 				</form>
 
 				{status === "submitted" && (

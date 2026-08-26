@@ -116,9 +116,17 @@ export function Contact() {
 				headers: { Accept: "application/json" },
 				body: new FormData(form),
 			});
+			if (!response.ok) {
+				console.error(
+					`Formspree submission failed with status ${response.status}`,
+				);
+			}
 			setStatus(response.ok ? "success" : "error");
-		} catch {
-			// Network failure (offline, blocked request, etc).
+		} catch (err) {
+			// Network failure (offline, blocked request, etc). No error-reporting
+			// service exists in this project yet — logging to the console is
+			// the best available diagnostic short of adding one.
+			console.error("Formspree submission failed", err);
 			setStatus("error");
 		}
 	};
