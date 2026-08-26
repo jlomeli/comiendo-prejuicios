@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 import {
 	Card,
@@ -18,6 +19,11 @@ describe("Card", () => {
 	it("has data-slot='card' attribute", () => {
 		render(<Card>test</Card>);
 		expect(document.querySelector("[data-slot='card']")).toBeInTheDocument();
+	});
+
+	it("has no axe violations", async () => {
+		const { container } = render(<Card>Card content</Card>);
+		expect(await axe(container)).toHaveNoViolations();
 	});
 });
 

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 import { Button } from "./button";
 
@@ -56,5 +57,10 @@ describe("Button", () => {
 	it("applies lg size class", () => {
 		render(<Button size="lg">Large</Button>);
 		expect(screen.getByRole("button").className).toContain("h-10");
+	});
+
+	it("has no axe violations", async () => {
+		const { container } = render(<Button>Click me</Button>);
+		expect(await axe(container)).toHaveNoViolations();
 	});
 });
