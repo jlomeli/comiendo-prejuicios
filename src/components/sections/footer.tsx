@@ -59,6 +59,7 @@ function Newsletter() {
 						id="newsletter-email"
 						name="email"
 						type="email"
+						autoComplete="email"
 						required
 						placeholder="tu@correo.com"
 						className="flex-1"
