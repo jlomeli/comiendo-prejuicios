@@ -6,10 +6,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 const CONTACT_METHODS = [
-	{ id: "correo", label: "Correo" },
-	{ id: "whatsapp", label: "WhatsApp" },
-	{ id: "llamada", label: "Llamada telefónica" },
+	{ id: "correo", label: "Correo", needsPhone: false },
+	{ id: "whatsapp", label: "WhatsApp", needsPhone: true },
+	{ id: "llamada", label: "Llamada telefónica", needsPhone: true },
 ] as const;
+
+type ContactMethodId = (typeof CONTACT_METHODS)[number]["id"];
 
 const CONTACT_INFO = [
 	{
@@ -67,6 +69,7 @@ const CONTACT_INFO = [
 type FormErrors = {
 	nombre?: string;
 	correo?: string;
+	telefono?: string;
 };
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
@@ -74,13 +77,17 @@ type FormStatus = "idle" | "submitting" | "success" | "error";
 // Formspree form endpoint — see https://formspree.io/forms. Submissions are
 // emailed to Claudia; the free tier caps at 50/mo. Public form IDs are safe
 // to ship client-side (they're not a secret, just an inbox address).
+// Formspree treats a few field names specially: `email` becomes the
+// notification's Reply-To, `_subject` its subject line, and a non-empty
+// `_gotcha` marks the submission as bot spam.
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mjybzkna";
 
 /** Validates required fields using the HTML5 Constraint Validation API. */
 function validateForm(form: HTMLFormElement): FormErrors {
 	const errors: FormErrors = {};
 	const nombre = form.elements.namedItem("nombre") as HTMLInputElement;
-	const correo = form.elements.namedItem("correo") as HTMLInputElement;
+	const correo = form.elements.namedItem("email") as HTMLInputElement;
+	const telefono = form.elements.namedItem("telefono") as HTMLInputElement;
 
 	if (!nombre.validity.valid) {
 		errors.nombre = nombre.validity.valueMissing
@@ -94,12 +101,20 @@ function validateForm(form: HTMLFormElement): FormErrors {
 				? "El correo no parece válido. Ejemplo: tu@correo.com"
 				: correo.validationMessage;
 	}
+	if (!telefono.validity.valid) {
+		errors.telefono = telefono.validity.valueMissing
+			? "Para contactarte por WhatsApp o llamada necesito tu número."
+			: telefono.validationMessage;
+	}
 	return errors;
 }
 
 export function Contact() {
 	const [errors, setErrors] = useState<FormErrors>({});
 	const [status, setStatus] = useState<FormStatus>("idle");
+	const [method, setMethod] = useState<ContactMethodId | undefined>();
+	const phoneRequired =
+		CONTACT_METHODS.find((m) => m.id === method)?.needsPhone ?? false;
 	// Disable JS-driven animations when user prefers reduced motion (WCAG 2.3.3)
 	const shouldReduceMotion = useReducedMotion();
 
@@ -246,6 +261,19 @@ export function Contact() {
 							</div>
 
 							<form className="space-y-6" noValidate onSubmit={handleSubmit}>
+								<input
+									type="hidden"
+									name="_subject"
+									value="Nuevo mensaje desde Comiendo Prejuicios"
+								/>
+								<input
+									type="text"
+									name="_gotcha"
+									tabIndex={-1}
+									autoComplete="off"
+									aria-hidden="true"
+									style={{ display: "none" }}
+								/>
 								{/* Nombre */}
 								<div className="space-y-2">
 									<Label htmlFor="contact-name">Nombre</Label>
@@ -277,7 +305,7 @@ export function Contact() {
 									<Label htmlFor="contact-email">Correo electrónico</Label>
 									<Input
 										id="contact-email"
-										name="correo"
+										name="email"
 										type="email"
 										autoComplete="email"
 										required
@@ -326,6 +354,7 @@ export function Contact() {
 													type="radio"
 													name="metodo"
 													value={method.id}
+													onChange={() => setMethod(method.id)}
 													className="accent-[var(--brand-gold)]"
 												/>
 												{method.label}
@@ -333,6 +362,34 @@ export function Contact() {
 										))}
 									</div>
 								</fieldset>
+
+								{/* Teléfono */}
+								<div className="space-y-2">
+									<Label htmlFor="contact-phone">
+										Teléfono o WhatsApp{phoneRequired ? "" : " (opcional)"}
+									</Label>
+									<Input
+										id="contact-phone"
+										name="telefono"
+										type="tel"
+										autoComplete="tel"
+										required={phoneRequired}
+										placeholder="+52 55 1234 5678"
+										aria-invalid={errors.telefono ? "true" : undefined}
+										aria-describedby={
+											errors.telefono ? "contact-phone-error" : undefined
+										}
+									/>
+									{errors.telefono && (
+										<p
+											id="contact-phone-error"
+											role="alert"
+											className="text-xs mt-1 text-destructive"
+										>
+											{errors.telefono}
+										</p>
+									)}
+								</div>
 
 								{/* Submit */}
 								<motion.button

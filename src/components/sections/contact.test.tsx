@@ -100,6 +100,49 @@ describe("Contact", () => {
 		);
 	});
 
+	it("requires a phone number when WhatsApp or a call is the preferred method", async () => {
+		const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+		vi.stubGlobal("fetch", fetchMock);
+		const user = userEvent.setup();
+
+		render(<Contact />);
+		await user.click(screen.getByLabelText("WhatsApp"));
+		await fillAndSubmit(user);
+
+		expect(
+			await screen.findByText(
+				"Para contactarte por WhatsApp o llamada necesito tu número.",
+			),
+		).toBeInTheDocument();
+		expect(fetchMock).not.toHaveBeenCalled();
+
+		await user.type(screen.getByLabelText("Teléfono o WhatsApp"), "5512345678");
+		await user.click(screen.getByRole("button", { name: "Enviar mensaje" }));
+
+		expect(
+			await screen.findByRole("button", { name: "¡Mensaje enviado!" }),
+		).toBeInTheDocument();
+		const sentBody = fetchMock.mock.calls[0][1].body as FormData;
+		expect(sentBody.get("metodo")).toBe("whatsapp");
+		expect(sentBody.get("telefono")).toBe("5512345678");
+		vi.unstubAllGlobals();
+	});
+
+	it("keeps the phone number optional when email is the preferred method", async () => {
+		const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+		vi.stubGlobal("fetch", fetchMock);
+		const user = userEvent.setup();
+
+		render(<Contact />);
+		await user.click(screen.getByLabelText("Correo"));
+		await fillAndSubmit(user);
+
+		expect(
+			await screen.findByRole("button", { name: "¡Mensaje enviado!" }),
+		).toBeInTheDocument();
+		vi.unstubAllGlobals();
+	});
+
 	it("has no axe violations", async () => {
 		const { container } = render(<Contact />);
 		expect(await axe(container)).toHaveNoViolations();
@@ -130,7 +173,8 @@ describe("Contact", () => {
 			);
 			const sentBody = fetchMock.mock.calls[0][1].body as FormData;
 			expect(sentBody.get("nombre")).toBe("Lectora");
-			expect(sentBody.get("correo")).toBe("lectora@correo.com");
+			expect(sentBody.get("email")).toBe("lectora@correo.com");
+			expect(sentBody.get("_gotcha")).toBe("");
 		});
 
 		it("shows an error message and a fallback email when the request fails", async () => {
